@@ -3,6 +3,9 @@ eFindMe
 
 Description : eFindMe is a program who build for you your e-reputation
 
+Plugin : 
+	- M2E - Maven Integration for Eclipse
+
 Pour lancer le projet : 
 	- Créer un répertoire vide
 	- git clone https://github.com/Vladk-el/eFindMe.git
