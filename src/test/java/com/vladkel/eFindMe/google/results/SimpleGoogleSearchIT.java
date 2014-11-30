@@ -16,7 +16,7 @@ public class SimpleGoogleSearchIT {
 		try{
 			for (int r = 0; r < 20; r = r + 4) {
 				String address = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&start=" + r + "&q=";
-				String query = "ELiott Laversin";
+				String query = "Diégo Da Costa";
 				String charset = "UTF-8";
 		 
 				//URL url = new URL("https://www.google.fr/webhp?&ion=1&espv=2&ie=UTF-8#safe=off&q=eliott%20laversin");
