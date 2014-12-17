@@ -17,29 +17,30 @@ public class FacebookIT {
 	
 	public static void main(String[] args){
 		
-		//searchUsers();
+		searchUsers();
 		
 		//getNews();
 		
-		getUser();
+		//getUser();
 		
 	}
 
 	public static void searchUsers(){
-		String search = "Touzeau";
-		String searchFor = "Olivier Touzeau";
+		String search = "Diego Da Costa Oliveira";
+		//String searchFor = "Olivier Touzeau";
 		
 		List<User> users = new ArrayList<User>();
 		
 		try {
 			ResponseList<User> results = facebook.searchUsers(search);
 			for(User u : results){
+				//System.out.println(u);
 				User user = facebook.getUser(u.getId());
 				System.out.println(user);
-				if(u.getName().equalsIgnoreCase(searchFor)){
+				/*if(u.getName().equalsIgnoreCase(searchFor)){
 					System.out.println(searchFor + " founded !!!");
 					users.add(user);
-				}
+				}*/
 			}
 		} catch (FacebookException e) {
 			// TODO Auto-generated catch block
