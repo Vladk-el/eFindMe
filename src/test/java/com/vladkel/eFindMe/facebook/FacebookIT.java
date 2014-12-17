@@ -84,14 +84,20 @@ public class FacebookIT {
 			
 			System.out.println(user);
 			
-			ResponseList<Post> posts = facebook.getPosts();
 			
-			for(Post post : posts){
+			//ResponseList<Post> posts = facebook.getFeed("187446750783");
+			
+			
+			//ResponseList<Post> posts = facebook.getPosts("10205571992638526");
+			
+			//System.out.println(posts);
+			
+			/*for(Post post : posts){
 				System.out.println("From : " + post.getFrom().getName() + "(" + post.getFrom().getId() + ")");
 				System.out.println(post.getName());
 				System.out.println(post.getDescription());
 				System.out.println();
-			}
+			}*/
 							
 				
 				
