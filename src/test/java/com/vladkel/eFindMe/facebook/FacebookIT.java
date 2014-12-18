@@ -27,7 +27,7 @@ public class FacebookIT {
 
 	public static void searchUsers(){
 		String search = "Diego Da Costa Oliveira";
-		//String searchFor = "Olivier Touzeau";
+		//String searchFor = "Diego Da Costa Oliveira";
 		
 		List<User> users = new ArrayList<User>();
 		
