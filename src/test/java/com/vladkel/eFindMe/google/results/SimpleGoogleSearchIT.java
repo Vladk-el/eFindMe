@@ -5,14 +5,22 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
+import com.vladkel.eFindMe.google.search.GoogleSearch;
 
 
 public class SimpleGoogleSearchIT {
+	
+	private static final Logger log = LoggerFactory.getLogger(SimpleGoogleSearchIT.class);
 
 	public SimpleGoogleSearchIT(){};	
 	
-	public static void webAPI(){
+	public static void dirtyWebAPI(){
 		try{
 			for (int r = 0; r < 20; r = r + 4) {
 				String address = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&start=" + r + "&q=";
@@ -40,11 +48,24 @@ public class SimpleGoogleSearchIT {
 		}
 	}
 	
+	public void cleanWebAPI(){
+		GoogleSearch gs = new GoogleSearch(50, "Diégo Da Costa", true);
+		
+		List<Result> results = gs.getResults();
+		
+		for(Result r : results){
+			log.debug("Title: " + r.getTitle());
+			log.debug("URL: " + r.getUrl() + "\n");
+		}
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Hello SimpleGoogleSearchIT !");
 		
-		webAPI();
+		//dirtyWebAPI();
+		
+		new SimpleGoogleSearchIT().cleanWebAPI();
 		
 	}
 
