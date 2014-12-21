@@ -1,12 +1,26 @@
 package com.vladkel.eFindMe.search.engine;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.vladkel.eFindMe.bing.results.Result;
+import com.vladkel.eFindMe.bing.results.Trust;
+import com.vladkel.eFindMe.bing.search.BingSearch;
 import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
+import com.vladkel.eFindMe.search.engine.model.Matches;
+import com.vladkel.eFindMe.search.engine.model.Url;
 import com.vladkel.eFindMe.search.engine.model.User;
+import com.vladkel.eFindMe.utils.ws.http.GetHelper;
 
 public class SearchEngine {
 
 	private SearchEngineConfs confs;
 	
+	
+	public SearchEngine(){
+		super();
+	}
 	
 	/**
 	 * Methods
@@ -17,12 +31,67 @@ public class SearchEngine {
 		 * Search a people and update his graph
 		 * check all url and call detailledSearch
 		 */
+		
+		User user = confs.getUsers().get(id);
+		
+		BingSearch bing = new BingSearch(user.getName() + " " + user.getNickName());
+		
+		List<Result> results = bing.getResults();
+		
+		for(Result result : results){
+			detailledSearch(user, result);
+		}
 	}
 	
-	private void detailledSearch(User user){
+	private void detailledSearch(User user, Result result){
 		/**
 		 * Load html page one by one and check if it contains given urls
 		 */
+		
+		String response = null;
+		GetHelper helper = null;
+		
+		Url newUrl = new Url();
+			newUrl.setId(result.getID());
+			newUrl.setName(result.getTitle());
+			newUrl.setDescription(result.getDescription());
+			newUrl.setUrl(result.getUrl());
+			
+		if(result.getUrl().startsWith("http")){
+			helper = new GetHelper();
+		}
+		else if(result.getUrl().startsWith("https")){
+			helper = new com.vladkel.eFindMe.utils.ws.http.GetHelper();
+		}
+		
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Content-type", "text/html");
+		
+		response = helper.get(result.getUrl(), headers, false);
+		
+		boolean addToMap = false;
+		
+		for(Url url : user.getUrlsToLookFor()){
+			if(response.contains(url.getUrl())){
+				user.getMatches().add(new Matches(
+						url.getId(),
+						newUrl.getId(),
+						Trust.Trusted
+						));
+				addToMap = true;
+			}
+			else if(response.contains(user.getName() + " " + user.getNickName()) ||
+					response.contains(user.getNickName() + " " + user.getName())){
+				user.getMatches().add(new Matches(
+						url.getId(),
+						newUrl.getId(),
+						Trust.Unknown
+						));
+				addToMap = true;
+			}
+		}
+		
+		user.getUrls().put(newUrl.getId(), newUrl);
 	}
 	
 	public void showGraph(String id){

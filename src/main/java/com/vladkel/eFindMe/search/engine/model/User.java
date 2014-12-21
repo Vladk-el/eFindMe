@@ -1,6 +1,9 @@
 package com.vladkel.eFindMe.search.engine.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class User {
 	
@@ -12,11 +15,9 @@ public class User {
 	
 	private List<Url> urlsToLookFor;
 	
-	private List<Url> trustedUrls;
+	private Map<String, Url> urls;
 	
-	private List<Url> unknownUrls;
-	
-	private List<Url> badUrls;
+	private List<Matches> matches;
 	
 	
 	public User(){
@@ -32,6 +33,12 @@ public class User {
 		super();
 		setName(name);
 		setId(id);
+	}
+	
+	public void initLists(){
+		urlsToLookFor = new ArrayList<Url>();
+		urls = new HashMap<String, Url>();
+		setMatches(new ArrayList<Matches>());
 	}
 
 	public String getId() {
@@ -65,39 +72,23 @@ public class User {
 	public void setUrlsToLookFor(List<Url> urlsToLookFor) {
 		this.urlsToLookFor = urlsToLookFor;
 	}
-
-	public List<Url> getTrustedUrl() {
-		return trustedUrls;
+	
+	public Map<String, Url> getUrls() {
+		return urls;
 	}
 
-	public void setTrustedUrl(List<Url> trustedUrl) {
-		this.trustedUrls = trustedUrl;
-	}
-
-	public List<Url> getTrustedUrls() {
-		return trustedUrls;
-	}
-
-	public void setTrustedUrls(List<Url> trustedUrls) {
-		this.trustedUrls = trustedUrls;
-	}
-
-	public List<Url> getUnknownUrls() {
-		return unknownUrls;
-	}
-
-	public void setUnknownUrls(List<Url> unknownUrls) {
-		this.unknownUrls = unknownUrls;
-	}
-
-	public List<Url> getBadUrls() {
-		return badUrls;
-	}
-
-	public void setBadUrls(List<Url> badUrls) {
-		this.badUrls = badUrls;
+	public void setUrls(Map<String, Url> urls) {
+		this.urls = urls;
 	}
 	
+	public List<Matches> getMatches() {
+		return matches;
+	}
+
+	public void setMatches(List<Matches> matches) {
+		this.matches = matches;
+	}
+
 	public void readSelfXMLFile(){
 		/**
 		 * Here we'll directly fill an user with his xml file
@@ -109,6 +100,8 @@ public class User {
 		 * Here we'll directly save and update an user with his xml file
 		 */
 	}
+
+
 	
 	
 

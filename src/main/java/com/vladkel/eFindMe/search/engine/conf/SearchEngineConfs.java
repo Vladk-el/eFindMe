@@ -1,5 +1,7 @@
 package com.vladkel.eFindMe.search.engine.conf;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +19,14 @@ public class SearchEngineConfs {
 	private BingSearch searcher;
 	
 	private List<String> availableApis;
+	
+	
+	public SearchEngineConfs(){
+		super();
+		users = new HashMap<String, User>();
+		availableApis = new ArrayList<String>();
+	}
+	
 
 	public Map<String, User> getUsers() {
 		return users;
