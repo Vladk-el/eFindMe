@@ -38,6 +38,8 @@ public class SearchEngineIT {
 		
 		SearchEngine engine = new SearchEngine();
 		engine.setConfs(sec);
+		engine.search("0");
+		
 		
 		
 		

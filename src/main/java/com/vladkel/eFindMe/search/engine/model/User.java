@@ -22,17 +22,20 @@ public class User {
 	
 	public User(){
 		super();
+		initLists();
 	}
 	
 	public User(String name){
 		super();
 		setName(name);
+		initLists();
 	}
 	
 	public User(String name, String id){
 		super();
 		setName(name);
 		setId(id);
+		initLists();
 	}
 	
 	public void initLists(){

@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vladkel.eFindMe.bing.results.Result;
 import com.vladkel.eFindMe.bing.results.Trust;
 import com.vladkel.eFindMe.bing.search.BingSearch;
@@ -14,6 +17,8 @@ import com.vladkel.eFindMe.search.engine.model.User;
 import com.vladkel.eFindMe.utils.ws.http.GetHelper;
 
 public class SearchEngine {
+	
+	private static final Logger log = LoggerFactory.getLogger(SearchEngine.class);
 
 	private SearchEngineConfs confs;
 	
@@ -39,11 +44,16 @@ public class SearchEngine {
 		List<Result> results = bing.getResults();
 		
 		for(Result result : results){
-			detailledSearch(user, result);
+			try{
+				detailledSearch(user, result);
+			}catch(Exception e){
+				log.error("Exception on detailledSearch ", e);
+			}
+			
 		}
 	}
 	
-	private void detailledSearch(User user, Result result){
+	private void detailledSearch(User user, Result result) throws Exception{
 		/**
 		 * Load html page one by one and check if it contains given urls
 		 */
@@ -91,9 +101,13 @@ public class SearchEngine {
 			}
 		}
 		
-		user.getUrls().put(newUrl.getId(), newUrl);
+		if(addToMap)
+			user.getUrls().put(newUrl.getId(), newUrl);
 	}
 	
+	/**
+	 * Maybe not here
+	 */
 	public void showGraph(String id){
 		/**
 		 * Show the people's graph

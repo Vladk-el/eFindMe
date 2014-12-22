@@ -73,7 +73,7 @@ public class BingSearch {
             
             BingResult br = new Gson().fromJson(responseBody, BingResult.class);
             
-            log.info("BingResult => ", br);
+            log.info("BingResult => " + br);
             
             if(br != null){
             	httpclient.getConnectionManager().shutdown();
