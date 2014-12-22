@@ -9,8 +9,7 @@ public class Url {
 	private String description;
 	
 	private String url;
-	
-	
+		
 	public Url(){
 		super();
 	}
@@ -47,4 +46,7 @@ public class Url {
 		this.url = url;
 	}
 	
+	public String toString() {
+		return url;
+	}
 }

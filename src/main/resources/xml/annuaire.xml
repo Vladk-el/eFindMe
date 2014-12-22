@@ -1,12 +1,178 @@
-<annuaire> 
-	<personne id="0"> 
-		<nom>Laversin</nom> 
-		<prenom>Eliott</prenom> 
-		<adresse>Colombes</adresse> 
-	</personne> 
-	<personne id="1"> 
-		<nom>Da Costa Oliveira</nom> 
-		<prenom>Diégo</prenom> 
-		<adresse>Argenteuil</adresse> 
-	</personne> 
-</annuaire>
+<racine>
+  <links>
+    <link>
+      <id>1</id>
+      <name>Name 2</name>
+      <url>url 1</url>
+      <trust>trust 2</trust>
+    </link>
+
+    <link>
+      <id>2</id>
+      <name>Name 2</name>
+      <url>url 2</url>
+      <trust>trust 2</trust>
+    </link>
+
+    <link>
+      <id>3</id>
+      <name>Name 3</name>
+      <url>url 3</url>
+      <trust>trust 3</trust>
+    </link>
+
+    <link>
+      <id>4</id>
+      <name>Name 4</name>
+      <url>url 4</url>
+      <trust>trust 4</trust>
+    </link>
+
+    <link>
+      <id>5</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+    <link>
+      <id>6</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+
+<link>
+      <id>7</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+    <link>
+      <id>8</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+    <link>
+      <id>9</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+    <link>
+      <id>10</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+    <link>
+      <id>11</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+    <link>
+      <id>12</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+    <link>
+      <id>13</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+
+    <link>
+      <id>14</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+
+    <link>
+      <id>15</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+
+    <link>
+      <id>16</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+
+    <link>
+      <id>17</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+
+    <link>
+      <id>18</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+
+<link>
+      <id>14</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+      <trust>trust 5</trust>
+    </link>
+
+  </links>
+
+  <graph>
+    <edge>
+      <id>1</id>
+      <id1>2</id1>
+      <trust>Bad</trust>
+    </edge>
+
+    <edge>
+      <id>5</id>
+      <id1>2</id1>
+      <trust>Bad</trust>
+    </edge>
+
+
+<edge>
+      <id>5</id>
+      <id1>2</id1>
+      <trust>Bad</trust>
+    </edge>
+
+    <edge>
+      <id>8</id>
+      <id1>5</id1>
+      <trust>Bad</trust>
+    </edge>
+    <edge>
+
+      <id>10</id>
+      <id1>14</id1>
+      <trust>Bad</trust>
+    </edge>
+
+  </graph>
+</racine>
