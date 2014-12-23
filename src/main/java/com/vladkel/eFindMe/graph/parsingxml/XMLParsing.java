@@ -11,9 +11,9 @@ import com.vladkel.eFindMe.graph.XmlDetailFile;
 
 public class XMLParsing {
 	
-	private static String XML_FILE = "src/main/resources/xml/annuaire.xml";
+	private static final String XML_FILE = "data/xml/users/";
 	
-	public XMLParsing(XmlDetailFile detailFile){
+	public XMLParsing(XmlDetailFile detailFile, int indiceUser){
 		super();
 	}
 	
@@ -33,6 +33,8 @@ public class XMLParsing {
 	}
 	
 	public static String getXmlFile() {
-		return XML_FILE;
+		// Treatement recup id user ...
+		
+		return XML_FILE + "/toto/results.xml";
 	}
 }

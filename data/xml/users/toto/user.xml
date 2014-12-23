@@ -1,0 +1,11 @@
+<user>
+	<id></id>
+	<name></name>
+	<firstname></firstname>
+	
+	<urlsToLookFor>
+		<url>
+			...
+		</url>
+	</urlsToLookFor>
+</user>

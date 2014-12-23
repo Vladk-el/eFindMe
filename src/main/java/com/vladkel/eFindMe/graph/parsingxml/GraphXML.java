@@ -64,7 +64,7 @@ public class GraphXML {
 	
 	public void getDataXml(XmlDetailFile detailFile)
 	{
-		XMLParsing parsing = new XMLParsing(detailFile);	
+		XMLParsing parsing = new XMLParsing(detailFile,0);	
 		String response = parsing.getXMLFileInString();		
 		XmlReader reader = new XmlReader(new GraphHandler());
 		reader.read(response);
