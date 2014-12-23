@@ -1,0 +1,59 @@
+<results> <!-- results.xml -->
+  <links>
+    <link>
+      <id>111</id>
+      <name>Name 2</name>
+      <url>url 1</url>
+    </link>
+
+    <link>
+      <id>112</id>
+      <name>Name 2</name>
+      <url>url 2</url>
+    </link>
+
+    <link>
+      <id>113</id>
+      <name>Name 3</name>
+      <url>url 3</url>
+    </link>
+</links>
+
+  <graph>
+    <edge>
+      <id>1</id>
+      <id1>111</id1>
+      <trust>Bad</trust>
+    </edge>
+
+    <edge>
+      <id>1</id>
+      <id1>112</id1>
+      <trust>Bad</trust>
+    </edge>
+
+	<edge>
+      <id>1</id>
+      <id1>113</id1>
+      <trust>Bad</trust>
+    </edge>
+
+    <edge>
+      <id>2</id>
+      <id1>111</id1>
+      <trust>Bad</trust>
+    </edge>
+    
+    <edge>
+      <id>2</id>
+      <id1>112</id1>
+      <trust>Bad</trust>
+    </edge>
+    
+    <edge>
+      <id>2</id>
+      <id1>113</id1>
+      <trust>Bad</trust>
+    </edge>
+  </graph>
+</results>

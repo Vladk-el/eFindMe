@@ -8,8 +8,8 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-import com.vladkel.eFindMe.bing.results.Trust;
-import com.vladkel.eFindMe.search.engine.model.Matches;
+import com.vladkel.eFindMe.search.engine.model.Match;
+import com.vladkel.eFindMe.search.engine.model.Trust;
 import com.vladkel.eFindMe.search.engine.model.Url;
 
 public class GraphHandler implements ContentHandler {
@@ -20,7 +20,7 @@ public class GraphHandler implements ContentHandler {
 	private List<String> parents = new ArrayList<String>();
 		
 	private Url link;
-	private Matches matche;
+	private Match matche;
 	
 	public void startDocument() throws SAXException {
 	}
@@ -35,7 +35,7 @@ public class GraphHandler implements ContentHandler {
 		
 		if(localName.equalsIgnoreCase("edge")){
 			CurrentNode = "edge";
-			matche = new Matches();
+			matche = new Match();
 		}
 	}
 

@@ -1,22 +1,24 @@
 package com.vladkel.eFindMe.search.engine.model;
 
-import com.vladkel.eFindMe.bing.results.Trust;
 
-public class Matches {
+public class Match {
 	
 	private String idSource;
 	
 	private String idLink;
 	
 	private Trust trust;
-
 	
-	public Matches(String idSource, String idLink, Trust trust){
+
+	public Match(){
 		super();
 	}
 	
-	public Matches(){
+	public Match(String idSource, String idLink, Trust trust){
 		super();
+		this.idSource = idSource;
+		this.idLink = idLink;
+		this.trust = trust;
 	}
 	
 	public String getIdSource() {
@@ -41,5 +43,14 @@ public class Matches {
 
 	public void setTrust(Trust trust) {
 		this.trust = trust;
+	}
+	
+	public void setTrust(String trust) {
+		if(trust.equalsIgnoreCase("Trusted"))
+			this.trust = Trust.Trusted;
+		else if(trust.equalsIgnoreCase("Bad"))
+			this.trust = Trust.Bad;
+		else 
+			this.trust = Trust.Unknown;
 	}
 }

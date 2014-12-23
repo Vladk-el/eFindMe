@@ -51,6 +51,8 @@ public class DemoAnnuaireHandler implements ContentHandler {
 				}
 			}
 		}
+		
+		parents.add(localName); // need to be here
 	}
 	
 	/**

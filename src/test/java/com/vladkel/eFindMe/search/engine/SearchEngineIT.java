@@ -29,7 +29,7 @@ public class SearchEngineIT {
 		
 		User eliott = new User();
 			 eliott.setName("Laversin");
-			 eliott.setNickName("Eliott");
+			 eliott.setFirstname("Eliott");
 			 eliott.setId("0");
 			 eliott.setUrlsToLookFor(urls);
 			 

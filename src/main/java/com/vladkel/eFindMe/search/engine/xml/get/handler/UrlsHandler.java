@@ -1,31 +1,39 @@
-package com.vladkel.eFindMe.xml.parsing.template;
+package com.vladkel.eFindMe.search.engine.xml.get.handler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-public class TemplateXMLHandler implements ContentHandler {
+import com.vladkel.eFindMe.search.engine.model.Url;
+
+public class UrlsHandler implements ContentHandler {
 	
-	/**
-	 * This is only the struture you have to had.
-	 * Don't edit this class, make a other one to test.
-	 * See xml.parsing.demo for an complete example
-	 */
-	
+	private static final Logger log = LoggerFactory.getLogger(UrlsHandler.class);
 	
 	private StringBuffer buffer;
 	private List<String> parents = new ArrayList<String>();
-
+	
+	private Map<String, Url> urls;
+	private Url url;
+	
+	
+	public Map<String, Url> getUrls(){
+		return this.urls;
+	}
 
 	/**
 	 * Start reading document
 	 */
 	public void startDocument() throws SAXException {
-		
+		urls = new HashMap<String, Url>();
 	}
 	
 	/**
@@ -34,9 +42,11 @@ public class TemplateXMLHandler implements ContentHandler {
 	public void startElement(String uri, String localName, String name, Attributes atts) throws SAXException {
 		buffer = new StringBuffer(); // need to be here
 		
-		/**
-		 * your code here
-		 */
+		if(localName.equalsIgnoreCase("link")){
+			if(parents.get(parents.size() - 1).equalsIgnoreCase("links")){
+				url = new Url();
+			}
+		}
 		
 		parents.add(localName); // need to be here
 	}
@@ -47,6 +57,30 @@ public class TemplateXMLHandler implements ContentHandler {
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		parents.remove(localName); // need to be here
 		
+		if(parents.size() > 0){
+			
+			if(parents.get(parents.size() - 1).equalsIgnoreCase("link")){
+				if(localName.equalsIgnoreCase("id")){
+					url.setId(buffer.toString());
+				}
+				if(localName.equalsIgnoreCase("name")){
+					url.setName(buffer.toString());
+				}
+				if(localName.equalsIgnoreCase("description")){
+					url.setDescription(buffer.toString());
+				}
+				if(localName.equalsIgnoreCase("url")){
+					url.setUrl(buffer.toString());
+				}
+			}
+			
+			// Users urls
+			if(parents.get(parents.size() - 1).equalsIgnoreCase("links")){
+				if(localName.equalsIgnoreCase("link")){
+					urls.put(url.getId(), url);
+				}
+			}
+		}
 	}
 
 	/**

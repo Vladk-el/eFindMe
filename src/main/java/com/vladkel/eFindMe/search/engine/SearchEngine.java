@@ -8,10 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vladkel.eFindMe.bing.results.Result;
-import com.vladkel.eFindMe.bing.results.Trust;
 import com.vladkel.eFindMe.bing.search.BingSearch;
 import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
-import com.vladkel.eFindMe.search.engine.model.Matches;
+import com.vladkel.eFindMe.search.engine.model.Match;
+import com.vladkel.eFindMe.search.engine.model.Trust;
 import com.vladkel.eFindMe.search.engine.model.Url;
 import com.vladkel.eFindMe.search.engine.model.User;
 import com.vladkel.eFindMe.utils.ws.http.GetHelper;
@@ -39,7 +39,7 @@ public class SearchEngine {
 		
 		User user = confs.getUsers().get(id);
 		
-		BingSearch bing = new BingSearch(user.getName() + " " + user.getNickName());
+		BingSearch bing = new BingSearch(user.getName() + " " + user.getFirstname());
 		
 		List<Result> results = bing.getResults();
 		
@@ -83,16 +83,16 @@ public class SearchEngine {
 		
 		for(Url url : user.getUrlsToLookFor()){
 			if(response.contains(url.getUrl())){
-				user.getMatches().add(new Matches(
+				user.getMatches().add(new Match(
 						url.getId(),
 						newUrl.getId(),
 						Trust.Trusted
 						));
 				addToMap = true;
 			}
-			else if(response.contains(user.getName() + " " + user.getNickName()) ||
-					response.contains(user.getNickName() + " " + user.getName())){
-				user.getMatches().add(new Matches(
+			else if(response.contains(user.getName() + " " + user.getFirstname()) ||
+					response.contains(user.getFirstname() + " " + user.getName())){
+				user.getMatches().add(new Match(
 						url.getId(),
 						newUrl.getId(),
 						Trust.Unknown

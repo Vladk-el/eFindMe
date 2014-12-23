@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.vladkel.eFindMe.graph.XmlDetailFile;
-import com.vladkel.eFindMe.search.engine.model.Matches;
+import com.vladkel.eFindMe.search.engine.model.Match;
 import com.vladkel.eFindMe.search.engine.model.Url;
 
 public class GraphXML {
@@ -24,7 +24,7 @@ public class GraphXML {
 	}
 	
 	private Map<Integer,Url> urls = new HashMap<Integer,Url>();
-	private List<Matches> matches = new ArrayList<Matches>();
+	private List<Match> matches = new ArrayList<Match>();
 		
 	public GraphXML(){
 		super();
@@ -35,9 +35,9 @@ public class GraphXML {
 		return urls.get(indice);
 	}
 	
-	public Matches getMatch(int indiceUrl)
+	public Match getMatch(int indiceUrl)
 	{
-		for(Matches m : matches)
+		for(Match m : matches)
 		{
 			if(Integer.parseInt(m.getIdLink()) == indiceUrl)
 				return m;
@@ -54,11 +54,11 @@ public class GraphXML {
 		this.urls = urls;
 	}
 	
-	public List<Matches> getMatches() {
+	public List<Match> getMatches() {
 		return matches;
 	}
 
-	public void setMatches(List<Matches> matches) {
+	public void setMatches(List<Match> matches) {
 		this.matches = matches;
 	}
 	
@@ -82,7 +82,7 @@ public class GraphXML {
 		
 		System.out.println("Matches : ");
 		
-		for(Matches matche : matches)
+		for(Match matche : matches)
 		{
 			System.out.println("Source : " + matche.getIdSource());
 			System.out.println("Destination : " + matche.getIdLink());

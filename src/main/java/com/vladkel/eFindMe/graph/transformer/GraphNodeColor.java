@@ -6,7 +6,7 @@ import java.awt.Paint;
 import org.apache.commons.collections15.Transformer;
 
 import com.vladkel.eFindMe.graph.parsingxml.GraphXML;
-import com.vladkel.eFindMe.search.engine.model.Matches;
+import com.vladkel.eFindMe.search.engine.model.Match;
 import com.vladkel.eFindMe.search.engine.model.Url;
 
 import edu.uci.ics.jung.visualization.picking.PickedInfo;
@@ -23,7 +23,7 @@ public class GraphNodeColor implements Transformer<Url, Paint>{
 	@Override
 	public Paint transform(Url node) {
 		
-		Matches matches = GraphXML.getInstance().getMatch(Integer.parseInt(node.getId()));
+		Match matches = GraphXML.getInstance().getMatch(Integer.parseInt(node.getId()));
 				
 		if(matches != null)
 		{

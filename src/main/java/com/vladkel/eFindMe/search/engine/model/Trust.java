@@ -1,4 +1,4 @@
-package com.vladkel.eFindMe.bing.results;
+package com.vladkel.eFindMe.search.engine.model;
 
 public enum Trust {
 	Trusted,

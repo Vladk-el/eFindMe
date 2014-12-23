@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user>
+	<id>0</id>
+	<name>Laversin</name>
+	<firstname>Eliott</firstname>
+	
+	<urlsToLookFor>
+		<url>
+			<id>0</id>
+			<name>Facebook Eliott Laversin</name>
+			<description>Page Facebook d'Eliott Laversin</description>
+			<url>https://www.facebook.com/eliott.laversin</url>
+		</url>
+		<url>
+			<id>1</id>
+			<name>GitHub Eliott Laversin</name>
+			<description>Page GitHub d'Eliott Laversin</description>
+			<url>https://github.com/Vladk-el</url>
+		</url>
+	</urlsToLookFor>
+</user>

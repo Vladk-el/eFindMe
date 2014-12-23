@@ -5,19 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
 public class User {
-	
+		
 	private String id;
 
 	private String name;
 	
-	private String nickName;
+	private String firstname;
 	
 	private List<Url> urlsToLookFor;
 	
 	private Map<String, Url> urls;
 	
-	private List<Matches> matches;
+	private List<Match> matches;
 	
 	
 	public User(){
@@ -41,7 +43,7 @@ public class User {
 	public void initLists(){
 		urlsToLookFor = new ArrayList<Url>();
 		urls = new HashMap<String, Url>();
-		setMatches(new ArrayList<Matches>());
+		setMatches(new ArrayList<Match>());
 	}
 
 	public String getId() {
@@ -60,12 +62,13 @@ public class User {
 		this.name = name;
 	}
 
-	public String getNickName() {
-		return nickName;
+
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public List<Url> getUrlsToLookFor() {
@@ -84,11 +87,11 @@ public class User {
 		this.urls = urls;
 	}
 	
-	public List<Matches> getMatches() {
+	public List<Match> getMatches() {
 		return matches;
 	}
 
-	public void setMatches(List<Matches> matches) {
+	public void setMatches(List<Match> matches) {
 		this.matches = matches;
 	}
 
@@ -102,6 +105,10 @@ public class User {
 		/**
 		 * Here we'll directly save and update an user with his xml file
 		 */
+	}
+	
+	public String toString(){
+		return new Gson().toJson(this);
 	}
 
 

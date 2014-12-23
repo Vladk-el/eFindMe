@@ -1,4 +1,4 @@
-package com.vladkel.eFindMe.xml.parsing;
+package com.vladkel.eFindMe.xml.parsing.demo;
 
 import com.vladkel.eFindMe.xml.parsing.demo.DemoSimpleXMLParsing;
 

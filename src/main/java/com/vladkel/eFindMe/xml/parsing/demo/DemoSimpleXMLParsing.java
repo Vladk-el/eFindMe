@@ -6,8 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.xml.sax.XMLReader;
-
 import com.vladkel.eFindMe.xml.parsing.demo.handler.DemoAnnuaireHandler;
 import com.vladkel.eFindMe.xml.parsing.demo.model.Annuaire;
 import com.vladkel.eFindMe.xml.parsing.reader.XmlReader;

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import com.vladkel.eFindMe.graph.parsingxml.GraphXML;
 import com.vladkel.eFindMe.graph.transformer.GraphEdgeColor;
 import com.vladkel.eFindMe.graph.transformer.GraphNodeColor;
-import com.vladkel.eFindMe.search.engine.model.Matches;
+import com.vladkel.eFindMe.search.engine.model.Match;
 import com.vladkel.eFindMe.search.engine.model.Url;
 
 import edu.uci.ics.jung.algorithms.layout.TreeLayout;
@@ -104,7 +104,7 @@ public class Graph extends JPanel {
 		
 		Integer indice = 0 ;
 		
-		for(Matches matche : GraphXML.getInstance().getMatches())
+		for(Match matche : GraphXML.getInstance().getMatches())
 		{
 			graph.addEdge(indice.toString(), GraphXML.getInstance().getUrl(Integer.parseInt(matche.getIdSource())), GraphXML.getInstance().getUrl(Integer.parseInt(matche.getIdLink())));
 			indice++;
