@@ -18,7 +18,7 @@ public class DemoSimpleXMLParsing {
 	 * Simple demo for fill an Annuaire object with a xml file
 	 */
 	
-	private static final String XML_FILE = "src/main/resources/xml/annuaire.xml";
+	private static final String XML_FILE = "src/main/resources/xml/demo/annuaire.xml";
 	
 	
 	public DemoSimpleXMLParsing(){

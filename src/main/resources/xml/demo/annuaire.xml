@@ -1,0 +1,12 @@
+<annuaire> 
+	<personne id="0"> 
+		<nom>Laversin</nom> 
+		<prenom>Eliott</prenom> 
+		<adresse>DTC</adresse> 
+	</personne> 
+	<personne id="1"> 
+		<nom>Da Costa Oliveira</nom> 
+		<prenom>Diégo</prenom> 
+		<adresse>Drancy</adresse> 
+	</personne> 
+</annuaire>
