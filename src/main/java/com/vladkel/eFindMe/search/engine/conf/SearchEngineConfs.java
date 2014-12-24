@@ -7,13 +7,14 @@ import java.util.Map;
 
 import com.vladkel.eFindMe.bing.search.BingSearch;
 import com.vladkel.eFindMe.search.engine.model.User;
+import com.vladkel.eFindMe.search.engine.xml.get.GetUsers;
 
 public class SearchEngineConfs {
 
 	/**
 	 * For the moment, simple static class for users conf
 	 */
-	
+		
 	private Map<String, User> users;
 	
 	private BingSearch searcher;
@@ -25,8 +26,24 @@ public class SearchEngineConfs {
 		super();
 		users = new HashMap<String, User>();
 		availableApis = new ArrayList<String>();
+		loadUsers();
 	}
 	
+	
+	/**
+	 * Methods
+	 */
+	
+	private void loadUsers(){
+		
+		users = new GetUsers().getUsers();
+		
+	}
+
+	
+	/**
+	 * Getters and setters
+	 */
 
 	public Map<String, User> getUsers() {
 		return users;

@@ -67,13 +67,14 @@ public class GetUser {
 		return user;
 	}
 	
-	public String getXMLFileInString(String file){
+	public String getXMLFileInString(String file, boolean doLog){
 		StringBuilder sb = new StringBuilder();
 		try {
             List<String> lines = Files.readAllLines(Paths.get(getLocation() + file),
                     Charset.defaultCharset());
             for (String line : lines) {
-                log.info(line);
+                if(doLog)
+                	log.info(line);
                 sb.append(line);
             }
         } catch (IOException e) {
@@ -81,6 +82,10 @@ public class GetUser {
         }
 		
 		return sb.toString();
+	}
+	
+	public String getXMLFileInString(String file){
+		return getXMLFileInString(file, false);
 	}
 	
 	
