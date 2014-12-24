@@ -108,7 +108,29 @@ public class User {
 	}
 	
 	public String toString(){
-		return new Gson().toJson(this);
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("id : " + this.id + "\n");
+		sb.append("name : " + this.name + "\n");
+		sb.append("firstname : " + this.firstname + "\n");
+		
+		sb.append("urlsToLookFor : \n");
+		for(Url url : urlsToLookFor){
+			sb.append("\t" + new Gson().toJson(url) + "\n");
+		}
+		
+		sb.append("urls : \n");
+		for(Url url : urls.values()){
+			sb.append("\t" + new Gson().toJson(url) + "\n");
+		}
+		
+		sb.append("matches : \n");
+		for(Match macth : matches){
+			sb.append("\t" + new Gson().toJson(macth) + "\n");
+		}
+
+		//return new Gson().toJson(this);
+		return sb.toString();
 	}
 
 

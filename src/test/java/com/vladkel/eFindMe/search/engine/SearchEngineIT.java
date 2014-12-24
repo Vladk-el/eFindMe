@@ -11,6 +11,23 @@ public class SearchEngineIT {
 
 	public static void main(String [] args){
 		
+		//realTest();
+		
+		manualTest();
+	}
+	
+	public static void realTest(){
+		
+		SearchEngine engine = new SearchEngine();
+		
+		String idUser = "0";
+		
+		engine.search(idUser); // search for Eliott Laversin
+		
+		System.out.println(engine.getConfs().getUsers().get(idUser));
+	}
+	
+	public static void manualTest(){
 		SearchEngineConfs sec = new SearchEngineConfs();
 		
 		List<Url> urls = new ArrayList<Url>();
@@ -38,18 +55,9 @@ public class SearchEngineIT {
 		
 		SearchEngine engine = new SearchEngine();
 		engine.setConfs(sec);
-		engine.search("0");
+		engine.search(eliott.getId());
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		System.out.println(engine.getConfs().getUsers().get(eliott.getId()));
 	}
 	
 }

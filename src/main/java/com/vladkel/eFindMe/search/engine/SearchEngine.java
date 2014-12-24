@@ -25,6 +25,7 @@ public class SearchEngine {
 	
 	public SearchEngine(){
 		super();
+		confs = new SearchEngineConfs();
 	}
 	
 	/**
@@ -51,6 +52,7 @@ public class SearchEngine {
 			}
 			
 		}
+		log.info("Search finished !!!");
 	}
 	
 	private void detailledSearch(User user, Result result) throws Exception{
@@ -68,10 +70,10 @@ public class SearchEngine {
 			newUrl.setUrl(result.getUrl());
 			
 		if(result.getUrl().startsWith("http")){
-			helper = new GetHelper();
+			helper = new GetHelper(10000);
 		}
 		else if(result.getUrl().startsWith("https")){
-			helper = new com.vladkel.eFindMe.utils.ws.http.GetHelper();
+			helper = new com.vladkel.eFindMe.utils.ws.https.GetHelper(10000);
 		}
 		
 		Map<String, String> headers = new HashMap<String, String>();
@@ -79,30 +81,32 @@ public class SearchEngine {
 		
 		response = helper.get(result.getUrl(), headers, false);
 		
-		boolean addToMap = false;
-		
-		for(Url url : user.getUrlsToLookFor()){
-			if(response.contains(url.getUrl())){
-				user.getMatches().add(new Match(
-						url.getId(),
-						newUrl.getId(),
-						Trust.Trusted
-						));
-				addToMap = true;
+		if(response != null){
+			boolean addToMap = false;
+			
+			for(Url url : user.getUrlsToLookFor()){
+				if(response.contains(url.getUrl())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Trusted
+							));
+					addToMap = true;
+				}
+				else if(response.contains(user.getName() + " " + user.getFirstname()) ||
+						response.contains(user.getFirstname() + " " + user.getName())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Unknown
+							));
+					addToMap = true;
+				}
 			}
-			else if(response.contains(user.getName() + " " + user.getFirstname()) ||
-					response.contains(user.getFirstname() + " " + user.getName())){
-				user.getMatches().add(new Match(
-						url.getId(),
-						newUrl.getId(),
-						Trust.Unknown
-						));
-				addToMap = true;
-			}
+			
+			if(addToMap)
+				user.getUrls().put(newUrl.getId(), newUrl);
 		}
-		
-		if(addToMap)
-			user.getUrls().put(newUrl.getId(), newUrl);
 	}
 	
 	/**

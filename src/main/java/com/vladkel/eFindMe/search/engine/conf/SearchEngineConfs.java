@@ -35,9 +35,7 @@ public class SearchEngineConfs {
 	 */
 	
 	private void loadUsers(){
-		
 		users = new GetUsers().getUsers();
-		
 	}
 
 	
