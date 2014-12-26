@@ -17,6 +17,30 @@
       <name>Name 3</name>
       <url>url 3</url>
     </link>
+    
+    <link>
+      <id>4</id>
+      <name>Name 4</name>
+      <url>url 4</url>
+    </link>
+    
+    <link>
+      <id>5</id>
+      <name>Name 5</name>
+      <url>url 5</url>
+    </link>
+    
+    <link>
+      <id>6</id>
+      <name>Name 6</name>
+      <url>url 6</url>
+    </link>
+    
+    <link>
+      <id>7</id>
+      <name>Name 7</name>
+      <url>url 7</url>
+    </link>
 </links>
 
   <graph>
@@ -30,6 +54,12 @@
       <id>1</id>
       <id1>3</id1>
       <trust>Bad</trust>
+    </edge>
+    
+    <edge>
+      <id>2</id>
+      <id1>4</id1>
+      <trust>Trusted</trust>
     </edge>
   </graph>
 </results>

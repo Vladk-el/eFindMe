@@ -22,6 +22,12 @@ public class GraphHandler implements ContentHandler {
 	private Url link;
 	private Match matche;
 	
+	public GraphHandler()
+	{
+		GraphXML.getInstance().getUrls().clear();
+		GraphXML.getInstance().getMatches().clear();
+	}
+	
 	public void startDocument() throws SAXException {
 	}
 	

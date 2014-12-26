@@ -7,14 +7,18 @@ import java.util.List;
 
 import org.xml.sax.XMLReader;
 
-import com.vladkel.eFindMe.graph.XmlDetailFile;
+import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
+import com.vladkel.eFindMe.search.engine.model.User;
 
 public class XMLParsing {
 	
 	private static final String XML_FILE = "data/xml/users/";
+	private Integer indiceUser;
 	
-	public XMLParsing(XmlDetailFile detailFile, int indiceUser){
+	
+	public XMLParsing(Integer indiceUser){
 		super();
+		this.indiceUser = indiceUser;
 	}
 	
 	public String getXMLFileInString(){
@@ -32,9 +36,9 @@ public class XMLParsing {
 		return sb.toString();
 	}
 	
-	public static String getXmlFile() {
-		// Treatement recup id user ...
+	public String getXmlFile() {		
+		User user = new SearchEngineConfs().getUsers().get(indiceUser.toString());
 		
-		return XML_FILE + "/toto/results.xml";
+		return XML_FILE + "/" + user.getFirstname() + "_" + user.getName() + "/results.xml";
 	}
 }

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.vladkel.eFindMe.graph.XmlDetailFile;
 import com.vladkel.eFindMe.search.engine.model.Match;
 import com.vladkel.eFindMe.search.engine.model.Url;
 
@@ -62,9 +61,9 @@ public class GraphXML {
 		this.matches = matches;
 	}
 	
-	public void getDataXml(XmlDetailFile detailFile)
+	public void getDataXml(int indiceUser)
 	{
-		XMLParsing parsing = new XMLParsing(detailFile,0);	
+		XMLParsing parsing = new XMLParsing(indiceUser);	
 		String response = parsing.getXMLFileInString();		
 		XmlReader reader = new XmlReader(new GraphHandler());
 		reader.read(response);

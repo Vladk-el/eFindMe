@@ -113,7 +113,7 @@ public class Graph extends JPanel {
 
 	public static void main(String argv[])
 	{
-		GraphXML.getInstance().getDataXml(XmlDetailFile.Normal);
+		GraphXML.getInstance().getDataXml(0);
 		final Graph graph = new Graph();
 		graph.initGraph();
 
