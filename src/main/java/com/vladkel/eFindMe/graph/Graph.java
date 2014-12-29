@@ -74,7 +74,6 @@ public class Graph extends JPanel {
 	public void eventsGraph()
 	{
 		vv.addGraphMouseListener(new GraphMouseListener() {
-            @Override
             public void graphClicked(Object v, MouseEvent me) {
                 if (me.getButton() == MouseEvent.BUTTON1 && me.getClickCount() == 2) {
                     System.out.println("Double clicked "+ v);
@@ -82,11 +81,9 @@ public class Graph extends JPanel {
                 me.consume();
             }
 
-            @Override
             public void graphPressed(Object v, MouseEvent me) {
             }
 
-            @Override
             public void graphReleased(Object v, MouseEvent me) {
             }
         });

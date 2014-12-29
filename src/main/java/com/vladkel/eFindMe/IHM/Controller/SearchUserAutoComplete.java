@@ -29,20 +29,17 @@ public class SearchUserAutoComplete {
     private JPanel suggestionsPanel;
     private JWindow autoSuggestionPopUpWindow;
     private String typedWord;
-    private final ArrayList<String> dictionary = new ArrayList<>();
+    private final ArrayList<String> dictionary = new ArrayList<String>();
     private int currentIndexOfSpace, tW, tH;
     private DocumentListener documentListener = new DocumentListener() {
-        @Override
         public void insertUpdate(DocumentEvent de) {
             checkForAndShowSuggestions();
         }
 
-        @Override
         public void removeUpdate(DocumentEvent de) {
             checkForAndShowSuggestions();
         }
 
-        @Override
         public void changedUpdate(DocumentEvent de) {
             checkForAndShowSuggestions();
         }
@@ -77,7 +74,6 @@ public class SearchUserAutoComplete {
     private void addKeyBindingToRequestFocusInPopUpWindow() {
         textField.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "Down released");
         textField.getActionMap().put("Down released", new AbstractAction() {
-            @Override
             public void actionPerformed(ActionEvent ae) {//focuses the first label on popwindow
                 for (int i = 0; i < suggestionsPanel.getComponentCount(); i++) {
                     if (suggestionsPanel.getComponent(i) instanceof SuggestionLabel) {
@@ -95,7 +91,6 @@ public class SearchUserAutoComplete {
         suggestionsPanel.getActionMap().put("Down released", new AbstractAction() {
             int lastFocusableIndex = 0;
 
-            @Override
             public void actionPerformed(ActionEvent ae) {
 
                 ArrayList<SuggestionLabel> sls = getAddedSuggestionLabels();
@@ -144,7 +139,7 @@ public class SearchUserAutoComplete {
     }
 
     public ArrayList<SuggestionLabel> getAddedSuggestionLabels() {
-        ArrayList<SuggestionLabel> sls = new ArrayList<>();
+        ArrayList<SuggestionLabel> sls = new ArrayList<SuggestionLabel>();
         for (int i = 0; i < suggestionsPanel.getComponentCount(); i++) {
             if (suggestionsPanel.getComponent(i) instanceof SuggestionLabel) {
                 SuggestionLabel sl = (SuggestionLabel) suggestionsPanel.getComponent(i);
@@ -317,7 +312,6 @@ class SuggestionLabel extends JLabel {
 
         getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "Enter released");
         getActionMap().put("Enter released", new AbstractAction() {
-            @Override
             public void actionPerformed(ActionEvent ae) {
                 replaceWithSuggestedText();
                 autoSuggestionsPopUpWindow.setVisible(false);

@@ -14,7 +14,6 @@ public class UrlFindTableModel extends AbstractTableModel {
 		this.urlsFind = urlsFind;
 	}
 	
-	@Override
 	public int getColumnCount() {
 		return entetes.length;
 	}
@@ -24,12 +23,10 @@ public class UrlFindTableModel extends AbstractTableModel {
 		return entetes[columnIndex];
 	}
 
-	@Override
 	public int getRowCount() {
 		return urlsFind.size();
 	}
 
-	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) 
 		{

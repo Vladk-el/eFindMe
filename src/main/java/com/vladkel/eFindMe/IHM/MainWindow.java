@@ -111,26 +111,28 @@ public class MainWindow
 	{
 		setUser();
 		
-		userDetail.setPreferredSize(new Dimension(400,mainFrame.MAXIMIZED_VERT));
+		System.out.println("Width : " + Toolkit.getDefaultToolkit().getScreenSize().width);
+				
+		userDetail.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 4,mainFrame.MAXIMIZED_VERT));
 		
 		userDetail.setLayout(new GridBagLayout());
 		userDetail.setBorder(BorderFactory.createLineBorder(Color.black));		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		idTextField.setEditable(false);
-		idTextField.setPreferredSize(new Dimension(130,20));
-		nameTextField.setPreferredSize(new Dimension(130,20));
-		firstNameTextField.setPreferredSize(new Dimension(130,20));
+		idTextField.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10,20));
+		nameTextField.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10,20));
+		firstNameTextField.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10,20));
 	
-		detailLabel.setPreferredSize(new Dimension(300,100));
-		detailLabel.setFont(new Font("Arial", Font.BOLD, 24));	
+		detailLabel.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,Toolkit.getDefaultToolkit().getScreenSize().height / 13));
+		detailLabel.setFont(new Font("Arial", Font.BOLD, 22));	
 		
 		urlsToLookForLabel.setFont(new Font("Arial", Font.BOLD, 14));		
 		urlsFindLabel.setFont(new Font("Arial", Font.BOLD, 14));	
 		
-		listUrlsToLookFor.setPreferredSize(new Dimension(300,100));
+		listUrlsToLookFor.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,100));
 		
-	    jspUrlsFind.setPreferredSize(new Dimension(390,350));
+	    jspUrlsFind.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,Toolkit.getDefaultToolkit().getScreenSize().height/3));
 	    
 	    update.setBackground(Color.WHITE);
    
@@ -146,7 +148,7 @@ public class MainWindow
 	    gbc.gridheight = 1;
 	    gbc.gridwidth = 1;
 	    gbc.anchor = GridBagConstraints.EAST;
-	    gbc.insets = new Insets(5,0,0,0);
+	    gbc.insets = new Insets(0,0,0,0);
 	    userDetail.add(idLabel, gbc);
 	    
 	    gbc.gridx = 1;
@@ -154,7 +156,7 @@ public class MainWindow
 	    gbc.gridheight = 1;
 	    gbc.gridwidth = 1;
 	    gbc.anchor = GridBagConstraints.WEST;
-	    gbc.insets = new Insets(5,20,0,0);
+	    gbc.insets = new Insets(0,20,0,0);
 	    userDetail.add(idTextField, gbc);
 	    
 	    gbc.gridx = 0;
