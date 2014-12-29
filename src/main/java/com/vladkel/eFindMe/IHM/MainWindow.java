@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -31,6 +32,7 @@ import javax.swing.JToolBar;
 
 import com.vladkel.eFindMe.IHM.Controller.CurrentUser;
 import com.vladkel.eFindMe.IHM.Controller.SearchUserAutoComplete;
+import com.vladkel.eFindMe.IHM.View.AddUserView;
 import com.vladkel.eFindMe.IHM.model.UrlFindModel;
 import com.vladkel.eFindMe.IHM.model.UrlFindTableModel;
 import com.vladkel.eFindMe.graph.Graph;
@@ -110,9 +112,7 @@ public class MainWindow
 	private void initUserDetail()
 	{
 		setUser();
-		
-		System.out.println("Width : " + Toolkit.getDefaultToolkit().getScreenSize().width);
-				
+						
 		userDetail.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 4,mainFrame.MAXIMIZED_VERT));
 		
 		userDetail.setLayout(new GridBagLayout());
@@ -320,7 +320,7 @@ public class MainWindow
 	{
 		addUser.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
-		    	  
+		    	  AddUserView auv = new AddUserView(GetInstance());
 		      }
 		    });
 		

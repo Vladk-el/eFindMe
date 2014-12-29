@@ -1,5 +1,5 @@
 package com.vladkel.eFindMe.IHM.View;
 
-public class ConsultUsers {
+public class ConsultUsersView {
 
 }

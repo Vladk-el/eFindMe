@@ -15,6 +15,8 @@ public class User {
 	
 	private String firstname;
 	
+	private String email;
+
 	private List<Url> urlsToLookFor;
 	
 	private Map<String, Url> urls;
@@ -70,6 +72,15 @@ public class User {
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
 
 	public List<Url> getUrlsToLookFor() {
 		return urlsToLookFor;
@@ -113,6 +124,7 @@ public class User {
 		sb.append("id : " + this.id + "\n");
 		sb.append("name : " + this.name + "\n");
 		sb.append("firstname : " + this.firstname + "\n");
+		sb.append("email : " + this.email + "\n");
 		
 		sb.append("urlsToLookFor : \n");
 		for(Url url : urlsToLookFor){
@@ -132,9 +144,10 @@ public class User {
 		//return new Gson().toJson(this);
 		return sb.toString();
 	}
-
-
 	
-	
-
+	public static void createUser(User user)
+	{
+		// Method to create files user (Diego : user.xml and eliott : results.xml)
+		
+	}
 }
