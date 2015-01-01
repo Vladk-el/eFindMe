@@ -68,6 +68,9 @@ public class UserHandler implements ContentHandler {
 				if(localName.equalsIgnoreCase("firstname")){
 					user.setFirstname(buffer.toString());
 				}
+				if(localName.equalsIgnoreCase("email")){
+					user.setEmail(buffer.toString());
+				}
 			}
 			
 			// Users urls

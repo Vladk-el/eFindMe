@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.vladkel.eFindMe.search.engine.xml.set.SetUser;
 
 public class User {
 		
@@ -113,9 +114,7 @@ public class User {
 	}
 	
 	public void writeSelfXMLFile(){
-		/**
-		 * Here we'll directly save and update an user with his xml file
-		 */
+		new SetUser(this).saveUser();
 	}
 	
 	public String toString(){
@@ -147,7 +146,7 @@ public class User {
 	
 	public static void createUser(User user)
 	{
-		// Method to create files user (Diego : user.xml and eliott : results.xml)
-		
+		new SetUser(user).saveUser();
+		// Demo on src/test/java/com.vladkel.eFindMe.xml.parsing.user.SetUserIt
 	}
 }
