@@ -274,5 +274,10 @@ public class AddUserView extends JFrame{
 		    	  User.createUser(userToCreate);
 		      }
 		    });
+
+		/**
+		 * Not implemented yet
+		 * 	deleteUrl
+		 */
 	}
 }

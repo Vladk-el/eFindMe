@@ -347,6 +347,16 @@ public class MainWindow
 		    		searchUserTextField.setText("");  
             }
         });
+
+		/**
+		 * Not implemented yet :
+		 * 	addUrl
+		 * 	deleteUrl
+		 * 	update
+		 *
+		 * Look at the logs : GetUsers called to many times
+		 *
+		 */
 	}
 
 	/*
