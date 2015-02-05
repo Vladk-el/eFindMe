@@ -9,12 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import com.vladkel.eFindMe.IHM.MainWindow;
 import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
@@ -241,7 +236,10 @@ public class AddUserView extends JFrame{
 	    gbc.insets = new Insets(10,5,0,0);
 	    this.add(saveUser, gbc);
 	}
-	
+
+	/**
+	 * A REVOIR : peut être virer la création des url dirctement dans le user
+	 */
 	private void events()
 	{
 		addUrl.addActionListener(new ActionListener(){
@@ -256,11 +254,36 @@ public class AddUserView extends JFrame{
 		    	  url.setDescription(descriptionUrlLabel.getText());
 		    	  url.setName(nameUrlTextField.getText());
 		    	  url.setUrl(urlTextField.getText());
-		    	  
-		    	 userToCreate.getUrlsToLookFor().add(url);
+
+				  modelUrlsToLookFor.addElement(url);
+
+		    	  userToCreate.getUrlsToLookFor().add(url);
 		      }
-		    });
-		
+		});
+
+		deleteUrl.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				int index = listUrlsToLookFor.getSelectedIndex();
+
+				if(index != -1){
+					String message = "Etes vous sûr de vouloir supprimer l'url '" +
+									 ((Url)modelUrlsToLookFor.getElementAt(index)).getName() +
+									 "'?";
+					String title = "Supprimer une url";
+					int reply = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+
+					if (reply == JOptionPane.YES_OPTION)
+						modelUrlsToLookFor.remove(index);
+				}
+
+			}
+		});
+
+		/**
+		 * A REVOIR ==> création du user
+		 */
 		saveUser.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 
@@ -273,11 +296,6 @@ public class AddUserView extends JFrame{
 		    	  
 		    	  User.createUser(userToCreate);
 		      }
-		    });
-
-		/**
-		 * Not implemented yet
-		 * 	deleteUrl
-		 */
+		});
 	}
 }

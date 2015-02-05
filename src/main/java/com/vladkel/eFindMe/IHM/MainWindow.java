@@ -16,19 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
+import javax.swing.*;
 
 import com.vladkel.eFindMe.IHM.Controller.CurrentUser;
 import com.vladkel.eFindMe.IHM.Controller.SearchUserAutoComplete;
@@ -338,7 +326,7 @@ public class MainWindow
 		  	    	 }
 		  	      }
 		      }
-		    });
+		});
 		
 		searchUserTextField.addMouseListener(new MouseAdapter(){
             @Override
@@ -347,6 +335,30 @@ public class MainWindow
 		    		searchUserTextField.setText("");  
             }
         });
+
+		/* TODO */
+		addUrl.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "addUrl pressed");
+			}
+		});
+
+		/* TODO */
+		deleteUrl.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "deleteUrl pressed");
+			}
+		});
+
+		/* TODO */
+		update.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "update pressed");
+			}
+		});
 
 		/**
 		 * Not implemented yet :
@@ -359,10 +371,4 @@ public class MainWindow
 		 */
 	}
 
-	/*
-	public static void main(String[] args) {
-		
-		MainWindow mw = new MainWindow();
-	}
-	*/
 }
