@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -237,9 +238,7 @@ public class AddUserView extends JFrame{
 	    this.add(saveUser, gbc);
 	}
 
-	/**
-	 * A REVOIR : peut être virer la création des url dirctement dans le user
-	 */
+
 	private void events()
 	{
 		addUrl.addActionListener(new ActionListener(){
@@ -256,8 +255,6 @@ public class AddUserView extends JFrame{
 		    	  url.setUrl(urlTextField.getText());
 
 				  modelUrlsToLookFor.addElement(url);
-
-		    	  userToCreate.getUrlsToLookFor().add(url);
 		      }
 		});
 
@@ -282,7 +279,7 @@ public class AddUserView extends JFrame{
 		});
 
 		/**
-		 * A REVOIR ==> création du user
+		 * A checker
 		 */
 		saveUser.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
@@ -290,9 +287,14 @@ public class AddUserView extends JFrame{
 		    	  Integer indice = new SearchEngineConfs().getUsers().size();
 		    	  
 		    	  userToCreate.setId(indice.toString());
-		    	  userToCreate.setFirstname(firstNameLabel.getText());
+		    	  userToCreate.setFirstname(firstNameTextField.getText());
 		    	  userToCreate.setName(nameTextField.getText());
 		    	  userToCreate.setEmail(emailTextField.getText());
+
+				  for(int i = 0; i < listUrlsToLookFor.getModel().getSize(); i++){
+					  userToCreate.getUrlsToLookFor().add((Url)modelUrlsToLookFor.getElementAt(i));
+					  System.out.println(((Url)modelUrlsToLookFor.getElementAt(i)).getName() + " added to current user");
+				  }
 		    	  
 		    	  User.createUser(userToCreate);
 		      }
