@@ -19,6 +19,6 @@ public class SetUserIT {
 		User.createUser(user);
 		
 		// Dynamic way
-		//user.writeSelfXMLFile();
+		//user.writeSelfXMLFiles();
 	}
 }

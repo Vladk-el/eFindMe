@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.*;
@@ -62,6 +63,8 @@ public class AddUserView extends JFrame{
 		this.setBackground(Color.WHITE);
 		this.setTitle("Ajouter un utilisateur");
 		this.setSize(new Dimension(350,620));
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
@@ -243,18 +246,25 @@ public class AddUserView extends JFrame{
 	{
 		addUrl.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
-		    	  Url url = new Url();
-		    	  
-		    	  Integer indice = userToCreate.getUrlsToLookFor().size();
-		    	  
-		    	  System.out.println("Indice url : " + indice.toString());
-		    	  
-		    	  url.setId(indice.toString());
-		    	  url.setDescription(descriptionUrlLabel.getText());
-		    	  url.setName(nameUrlTextField.getText());
-		    	  url.setUrl(urlTextField.getText());
+		    	  if(isReadyToAddUrl()){
+					  Url url = new Url();
 
-				  modelUrlsToLookFor.addElement(url);
+					  Integer indice = userToCreate.getUrlsToLookFor().size();
+
+					  System.out.println("Indice url : " + indice.toString());
+
+					  url.setId(indice.toString());
+					  url.setName(nameUrlTextField.getText());
+					  url.setDescription(descriptionUrlLabel.getText());
+					  url.setUrl(urlTextField.getText());
+
+					  modelUrlsToLookFor.addElement(url);
+				  }
+				  else {
+					  JOptionPane.showMessageDialog(null,
+							  "Veuillez remplir les champs Nom, Description et Url pour enregistrer une url."
+					  );
+				  }
 		      }
 		});
 
@@ -284,20 +294,48 @@ public class AddUserView extends JFrame{
 		saveUser.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 
-		    	  Integer indice = new SearchEngineConfs().getUsers().size();
-		    	  
-		    	  userToCreate.setId(indice.toString());
-		    	  userToCreate.setFirstname(firstNameTextField.getText());
-		    	  userToCreate.setName(nameTextField.getText());
-		    	  userToCreate.setEmail(emailTextField.getText());
+				  if(isReadyToSave()){
+					  Integer indice = new SearchEngineConfs().getUsers().size();
 
-				  for(int i = 0; i < listUrlsToLookFor.getModel().getSize(); i++){
-					  userToCreate.getUrlsToLookFor().add((Url)modelUrlsToLookFor.getElementAt(i));
-					  System.out.println(((Url)modelUrlsToLookFor.getElementAt(i)).getName() + " added to current user");
+					  userToCreate.setId(indice.toString());
+					  userToCreate.setFirstname(firstNameTextField.getText());
+					  userToCreate.setName(nameTextField.getText());
+					  userToCreate.setEmail(emailTextField.getText());
+
+					  for(int i = 0; i < listUrlsToLookFor.getModel().getSize(); i++){
+						  userToCreate.getUrlsToLookFor().add((Url)modelUrlsToLookFor.getElementAt(i));
+						  System.out.println(((Url)modelUrlsToLookFor.getElementAt(i)).getName() + " added to current user");
+					  }
+
+					  User.createUser(userToCreate);
+					  close();
 				  }
-		    	  
-		    	  User.createUser(userToCreate);
+				  else {
+					  JOptionPane.showMessageDialog(null,
+							  "Veuillez remplir au moins les champs Nom, Prénom et Email pour enregistrer un utilisateur."
+					  );
+				  }
+
 		      }
 		});
 	}
+
+	private boolean isReadyToAddUrl(){
+		return nameUrlTextField.getText().length() > 0 &&
+				descriptionUrlLabel.getText().length() > 0 &&
+				urlTextField.getText().length() > 0
+				;
+	}
+
+	private boolean isReadyToSave(){
+		return firstNameTextField.getText().length() > 0 &&
+				nameTextField.getText().length() > 0 &&
+				emailTextField.getText().length() > 0
+				;
+
+	}
+	private void close(){
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
+
 }

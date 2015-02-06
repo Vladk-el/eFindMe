@@ -1,5 +1,6 @@
 package com.vladkel.eFindMe.search.engine.model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -107,14 +108,18 @@ public class User {
 		this.matches = matches;
 	}
 
-	public void readSelfXMLFile(){
+	public void readSelfXMLFiles(){
 		/**
 		 * Here we'll directly fill an user with his xml file
 		 */
 	}
 	
-	public void writeSelfXMLFile(){
+	public void writeSelfXMLFiles(){
 		new SetUser(this).saveUser();
+	}
+	
+	public void removeSelfXMLFiles(){
+		new SetUser(this).removeUser();
 	}
 	
 	public String toString(){

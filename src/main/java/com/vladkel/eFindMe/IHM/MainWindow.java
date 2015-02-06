@@ -20,6 +20,7 @@ import javax.swing.*;
 
 import com.vladkel.eFindMe.IHM.Controller.CurrentUser;
 import com.vladkel.eFindMe.IHM.Controller.SearchUserAutoComplete;
+import com.vladkel.eFindMe.IHM.View.AddUrlView;
 import com.vladkel.eFindMe.IHM.View.AddUserView;
 import com.vladkel.eFindMe.IHM.model.UrlFindModel;
 import com.vladkel.eFindMe.IHM.model.UrlFindTableModel;
@@ -336,19 +337,42 @@ public class MainWindow
             }
         });
 
-		/* TODO */
+
+		/**
+		 * Not implemented yet :
+		 * 	update
+		 *
+		 * Look at the logs : GetUsers called to many times
+		 *
+		 */
+
+		final MainWindow self = this;
+
 		addUrl.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "addUrl pressed");
+				System.out.println("addUrl pressed");
+				new AddUrlView(self);
 			}
 		});
 
-		/* TODO */
 		deleteUrl.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "deleteUrl pressed");
+				System.out.println("deleteUrl pressed");
+
+				int index = listUrlsToLookFor.getSelectedIndex();
+
+				if(index != -1){
+					String message = "Etes vous sûr de vouloir supprimer l'url '" +
+							((Url)modelUrlsToLookFor.getElementAt(index)).getName() +
+							"'?";
+					String title = "Supprimer une url";
+					int reply = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+
+					if (reply == JOptionPane.YES_OPTION)
+						modelUrlsToLookFor.remove(index);
+				}
 			}
 		});
 
@@ -357,18 +381,25 @@ public class MainWindow
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "update pressed");
+
+				User user = CurrentUser.getInstance().getUser();
+
+				/**
+				 * user.setId ....
+				 */
+
 			}
 		});
 
-		/**
-		 * Not implemented yet :
-		 * 	addUrl
-		 * 	deleteUrl
-		 * 	update
-		 *
-		 * Look at the logs : GetUsers called to many times
-		 *
-		 */
+
+	}
+
+	/**
+	 * Getters and Setters
+	 */
+
+	public DefaultListModel getModelUrlsToLookFor(){
+		return modelUrlsToLookFor;
 	}
 
 }

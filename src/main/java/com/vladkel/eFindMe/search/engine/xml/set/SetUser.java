@@ -218,6 +218,25 @@ public class SetUser {
 		return false;
 	}
 
+	public boolean removeUser(){
+		try{
+			fullPath = getPath() +
+					user.getFirstname().toLowerCase() +
+					"_" +
+					user.getName().toLowerCase().replaceAll(" ", "") +
+					"/";
+
+			File dir = new File(fullPath);
+			if(dir.exists()){
+				dir.delete();
+				return true;
+			}
+		}catch(Exception e){
+			log.error("Error on removeUser() : ", e);
+		}
+		return false;
+	}
+
 	
 	/**
 	 * Getters and setters
