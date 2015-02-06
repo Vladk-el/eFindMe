@@ -10,6 +10,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -228,7 +229,7 @@ public class SetUser {
 
 			File dir = new File(fullPath);
 			if(dir.exists()){
-				dir.delete();
+				FileUtils.deleteDirectory(dir);
 				return true;
 			}
 		}catch(Exception e){

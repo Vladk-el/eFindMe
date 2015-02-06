@@ -255,7 +255,7 @@ public class AddUserView extends JFrame{
 
 					  url.setId(indice.toString());
 					  url.setName(nameUrlTextField.getText());
-					  url.setDescription(descriptionUrlLabel.getText());
+					  url.setDescription(descriptionUrlTextArea.getText());
 					  url.setUrl(urlTextField.getText());
 
 					  modelUrlsToLookFor.addElement(url);

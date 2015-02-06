@@ -50,6 +50,9 @@ public class MainWindow
 	
 	private JLabel firstNameLabel = new JLabel("Prénom :");
 	private JTextField firstNameTextField = new JTextField();
+
+	private JLabel emailLabel = new JLabel("Email :");
+	private JTextField emailTextField = new JTextField();
 	
 	private JLabel urlsToLookForLabel = new JLabel("Vos urls :");
 	
@@ -112,6 +115,7 @@ public class MainWindow
 		idTextField.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10,20));
 		nameTextField.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10,20));
 		firstNameTextField.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10,20));
+		emailTextField.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/10,20));
 	
 		detailLabel.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,Toolkit.getDefaultToolkit().getScreenSize().height / 13));
 		detailLabel.setFont(new Font("Arial", Font.BOLD, 22));	
@@ -179,9 +183,25 @@ public class MainWindow
 	    gbc.anchor = GridBagConstraints.WEST;
 	    gbc.insets = new Insets(5,20,0,0);
 	    userDetail.add(firstNameTextField, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(5,0,0,0);
+		userDetail.add(emailLabel, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(5,20,0,0);
+		userDetail.add(emailTextField, gbc);
 	    
 	    gbc.gridx = 0;
-	    gbc.gridy = 5;
+	    gbc.gridy = 6;
 	    gbc.gridheight = 1;
 	    gbc.gridwidth = 1;
 	    gbc.anchor = GridBagConstraints.EAST;
@@ -189,7 +209,7 @@ public class MainWindow
 	    userDetail.add(urlsToLookForLabel, gbc);
 	    
 	    gbc.gridx = 0;
-	    gbc.gridy = 6;
+	    gbc.gridy = 7;
 	    gbc.gridheight = 2;
 	    gbc.gridwidth = 2;
 	    gbc.anchor = GridBagConstraints.CENTER;
@@ -204,7 +224,7 @@ public class MainWindow
 	    pan.add(deleteUrl);
 
 	    gbc.gridx = 0;
-	    gbc.gridy = 8;
+	    gbc.gridy = 9;
 	    gbc.gridheight = 1;
 	    gbc.gridwidth = 2;
 	    gbc.anchor = GridBagConstraints.CENTER;
@@ -212,7 +232,7 @@ public class MainWindow
 	    userDetail.add(pan, gbc);
 
 	    gbc.gridx = 0;
-	    gbc.gridy = 10;
+	    gbc.gridy = 11;
 	    gbc.gridheight = 1;
 	    gbc.gridwidth = 1;
 	    gbc.anchor = GridBagConstraints.EAST;
@@ -220,7 +240,7 @@ public class MainWindow
 	    userDetail.add(urlsFindLabel, gbc);
 	    	    
 	    gbc.gridx = 0;
-	    gbc.gridy = 11;
+	    gbc.gridy = 12;
 	    gbc.gridheight = 2;
 	    gbc.gridwidth = 2;
 	    gbc.anchor = GridBagConstraints.WEST;
@@ -228,7 +248,7 @@ public class MainWindow
 	    userDetail.add(jspUrlsFind, gbc);
 	    
 	    gbc.gridx = 1;
-	    gbc.gridy = 13;
+	    gbc.gridy = 14;
 	    gbc.gridheight = 1;
 	    gbc.gridwidth = 1;
 	    gbc.anchor = GridBagConstraints.EAST;
@@ -259,6 +279,7 @@ public class MainWindow
 		idTextField.setText(user.getId());
 		nameTextField.setText(user.getName());
 		firstNameTextField.setText(user.getFirstname());
+		emailTextField.setText(user.getEmail());
 		
 		List<UrlFindModel> urlsFind = new ArrayList<UrlFindModel>();
 		modelUrlsToLookFor.clear();
@@ -380,9 +401,44 @@ public class MainWindow
 		update.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "update pressed");
 
-				User user = CurrentUser.getInstance().getUser();
+				if(isReadyToUpdate()){
+
+					String message = "Etes vous sûr de vouloir enregistrer les modifications aportées ?";
+					String title = "Enregistrer les modifications ?";
+					int reply = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+
+					if(reply == JOptionPane.YES_OPTION){
+
+						CurrentUser.getInstance().getUser().removeSelfXMLFiles();
+
+						User user = new User();
+
+						user.setId(CurrentUser.getInstance().getUser().getId());
+						user.setName(nameTextField.getText());
+						user.setFirstname(firstNameTextField.getText());
+						user.setEmail(emailTextField.getText());
+
+						for(int i = 0; i < listUrlsToLookFor.getModel().getSize(); i++){
+							user.getUrlsToLookFor().add((Url)modelUrlsToLookFor.getElementAt(i));
+							System.out.println(((Url)modelUrlsToLookFor.getElementAt(i)).getName() + " added to current user");
+						}
+
+						/**
+						 * we don't save the urls, need to launch a new search
+						 */
+
+						user.writeSelfXMLFiles();
+
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null,
+							"Veuillez remplir au moins les champs Nom et Prénom pour modifier un utilisateur."
+					);
+				}
+
+
 
 				/**
 				 * user.setId ....
@@ -392,6 +448,12 @@ public class MainWindow
 		});
 
 
+	}
+
+	private boolean isReadyToUpdate(){
+		return firstNameTextField.getText().length() > 0 &&
+				nameTextField.getText().length() > 0
+				;
 	}
 
 	/**
