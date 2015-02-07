@@ -425,7 +425,7 @@ public class MainWindow
 						}
 
 						/**
-						 * we don't save the urls, need to launch a new search
+						 * We don't save the urls, so we need to launch a new search
 						 */
 
 						user.writeSelfXMLFiles();
@@ -437,13 +437,6 @@ public class MainWindow
 							"Veuillez remplir au moins les champs Nom et Prénom pour modifier un utilisateur."
 					);
 				}
-
-
-
-				/**
-				 * user.setId ....
-				 */
-
 			}
 		});
 
@@ -456,7 +449,7 @@ public class MainWindow
 				;
 	}
 
-	/**
+	/*
 	 * Getters and Setters
 	 */
 
