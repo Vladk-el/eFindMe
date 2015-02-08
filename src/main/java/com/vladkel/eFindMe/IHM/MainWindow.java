@@ -73,7 +73,8 @@ public class MainWindow
 	
 	public MainWindow()
 	{
-		userDetail.setVisible(false);
+		//userDetail.setVisible(false);
+		selectUser.setVisible(false);
 		
 		SearchEngine.getInstance().confs.loadUsers();
 
@@ -90,7 +91,7 @@ public class MainWindow
 
 		initToolBar();
 		initUserDetail();
-		initSelectUser();
+		// initSelectUser();
 	    			    
 		mainFrame.getContentPane().add(graph, BorderLayout.CENTER);
 		mainFrame.setVisible(true);
