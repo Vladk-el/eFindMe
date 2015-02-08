@@ -1,11 +1,12 @@
 package com.vladkel.eFindMe.IHM.View;
 
-import com.vladkel.eFindMe.IHM.Controller.CurrentUser;
 import com.vladkel.eFindMe.IHM.MainWindow;
+import com.vladkel.eFindMe.search.engine.SearchEngine;
 import com.vladkel.eFindMe.search.engine.model.Url;
 import com.vladkel.eFindMe.search.engine.model.User;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -130,7 +131,7 @@ public class AddUrlView extends JFrame {
                 if(isReadyToAddUrl()){
                     Url url = new Url();
 
-                    Integer indice = CurrentUser.getInstance().getUser().getUrlsToLookFor().size();
+                    Integer indice = SearchEngine.getInstance().currentUser.getUrlsToLookFor().size();
 
                     System.out.println("Indice url : " + indice.toString());
 

@@ -26,7 +26,6 @@ public class SearchEngineConfs {
 		super();
 		users = new HashMap<String, User>();
 		availableApis = new ArrayList<String>();
-		loadUsers();
 	}
 	
 	
@@ -34,7 +33,7 @@ public class SearchEngineConfs {
 	 * Methods
 	 */
 	
-	private void loadUsers(){
+	public void loadUsers(){
 		users = new GetUsers().getUsers();
 	}
 

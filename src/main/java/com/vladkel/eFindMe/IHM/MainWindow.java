@@ -18,7 +18,6 @@ import java.util.Map.Entry;
 
 import javax.swing.*;
 
-import com.vladkel.eFindMe.IHM.Controller.CurrentUser;
 import com.vladkel.eFindMe.IHM.Controller.SearchUserAutoComplete;
 import com.vladkel.eFindMe.IHM.View.AddUrlView;
 import com.vladkel.eFindMe.IHM.View.AddUserView;
@@ -26,6 +25,7 @@ import com.vladkel.eFindMe.IHM.model.UrlFindModel;
 import com.vladkel.eFindMe.IHM.model.UrlFindTableModel;
 import com.vladkel.eFindMe.graph.Graph;
 import com.vladkel.eFindMe.graph.parsingxml.GraphXML;
+import com.vladkel.eFindMe.search.engine.SearchEngine;
 import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
 import com.vladkel.eFindMe.search.engine.model.Url;
 import com.vladkel.eFindMe.search.engine.model.User;
@@ -40,6 +40,8 @@ public class MainWindow
 	private JButton searchUserButton = new JButton("Go");
 	
 	private JPanel userDetail = new JPanel();
+	private JPanel selectUser = new JPanel();
+
 	private JLabel detailLabel = new JLabel("Informations sur le client");
 
 	private JLabel idLabel = new JLabel("Indice :");
@@ -71,6 +73,10 @@ public class MainWindow
 	
 	public MainWindow()
 	{
+		userDetail.setVisible(false);
+		
+		SearchEngine.getInstance().confs.loadUsers();
+
 		getCurrentUser();
 		
 		mainFrame.setTitle("eFindMe");
@@ -84,21 +90,35 @@ public class MainWindow
 
 		initToolBar();
 		initUserDetail();
+		initSelectUser();
 	    			    
 		mainFrame.getContentPane().add(graph, BorderLayout.CENTER);
 		mainFrame.setVisible(true);
-		events();
+		events();		
 	}
 	
 	private void getCurrentUser()
 	{
 		// Check the last used user
-		CurrentUser.getInstance().setCurrentUser(new SearchEngineConfs().getUsers().get("1"));
+		SearchEngine.getInstance().currentUser = SearchEngine.getInstance().confs.getUsers().get("1");		
 	}
 	
 	public MainWindow GetInstance()
 	{
 		return this;
+	}
+	
+	private void initSelectUser()
+	{
+		selectUser.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 4,mainFrame.MAXIMIZED_VERT));
+		
+		selectUser.setLayout(new GridBagLayout());
+		selectUser.setBorder(BorderFactory.createLineBorder(Color.black));		
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		mainFrame.getContentPane().add(selectUser, BorderLayout.WEST);
+		
+		
 	}
 	
 	private void initUserDetail()
@@ -260,21 +280,22 @@ public class MainWindow
 	
 	public void setUser()
 	{
-		GraphXML.getInstance().getDataXml(Integer.parseInt(CurrentUser.getInstance().getUser().getId()));
-  		graph.initGraph();
+		GraphXML.getInstance().getDataXml(Integer.parseInt(SearchEngine.getInstance().currentUser.getId()));
+  		  		
+		graph.initGraph();
 		
 	    SearchUserAutoComplete autoSuggestor = new SearchUserAutoComplete(searchUserTextField, mainFrame, null, Color.WHITE, Color.BLACK, Color.RED, 1f);
         List<String> users = new ArrayList<String>();
         
-	    for(Integer i = 0 ; i < new SearchEngineConfs().getUsers().size() ; i++)
+	    for(Integer i = 0 ; i < SearchEngine.getInstance().confs.getUsers().size() ; i++)
 	    {
-	    	 User u = new SearchEngineConfs().getUsers().get(i.toString());    	 
+	    	 User u = SearchEngine.getInstance().confs.getUsers().get(i.toString());    	 
 	    	 users.add(u.getFirstname() + " " + u.getName());
 	    }
-        
+
         autoSuggestor.setDictionary(users);
-		
-		User user = CurrentUser.getInstance().getUser();
+
+		User user = SearchEngine.getInstance().currentUser;
 		
 		idTextField.setText(user.getId());
 		nameTextField.setText(user.getName());
@@ -293,7 +314,7 @@ public class MainWindow
 			UrlFindModel ufm = new UrlFindModel(url.getUrl(),new ArrayList<String>());
 		    urlsFind.add(ufm);
 		}
-				
+			
 		tableUrlsFind.setModel(new UrlFindTableModel(urlsFind));
 		
   		mainFrame.revalidate();
@@ -337,13 +358,13 @@ public class MainWindow
 		searchUserButton.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 
-		    	  for(Integer i = 0 ; i < new SearchEngineConfs().getUsers().size() ; i++)
+		    	  for(Integer i = 0 ; i <  SearchEngine.getInstance().confs.getUsers().size() ; i++)
 		  	      {
-		  	    	 User u = new SearchEngineConfs().getUsers().get(i.toString());
+		  	    	 User u = SearchEngine.getInstance().confs.getUsers().get(i.toString());
 		  	    	 
 		  	    	 if(searchUserTextField.getText().replaceAll(" ","").equals((u.getFirstname() + " " + u.getName()).replaceAll(" ","")))
 		  	    	 {
-		  	    		 CurrentUser.getInstance().setCurrentUser(new SearchEngineConfs().getUsers().get(i.toString()));
+		  	    		 SearchEngine.getInstance().currentUser = SearchEngine.getInstance().confs.getUsers().get(i.toString());
 		  	    		 setUser();  
 		  	    	 }
 		  	      }
@@ -410,11 +431,12 @@ public class MainWindow
 
 					if(reply == JOptionPane.YES_OPTION){
 
-						CurrentUser.getInstance().getUser().removeSelfXMLFiles();
+						SearchEngine.getInstance().currentUser.removeSelfXMLFiles();
+						//CurrentUser.getInstance().getUser().removeSelfXMLFiles();
 
 						User user = new User();
 
-						user.setId(CurrentUser.getInstance().getUser().getId());
+						user.setId(SearchEngine.getInstance().currentUser.getId());
 						user.setName(nameTextField.getText());
 						user.setFirstname(firstNameTextField.getText());
 						user.setEmail(emailTextField.getText());
@@ -429,7 +451,6 @@ public class MainWindow
 						 */
 
 						user.writeSelfXMLFiles();
-
 					}
 				}
 				else {

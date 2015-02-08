@@ -20,8 +20,19 @@ public class SearchEngine {
 	
 	private static final Logger log = LoggerFactory.getLogger(SearchEngine.class);
 
-	private SearchEngineConfs confs;
+	public SearchEngineConfs confs;
 	
+	public User currentUser;
+		
+	private static SearchEngine instance = null;
+	public static SearchEngine getInstance() {
+			
+		if(instance == null) {
+			instance = new SearchEngine();
+	    }
+			
+		return instance;
+	}	
 	
 	public SearchEngine(){
 		super();
