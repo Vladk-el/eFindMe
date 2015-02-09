@@ -23,6 +23,7 @@ import com.vladkel.eFindMe.IHM.View.AddUrlView;
 import com.vladkel.eFindMe.IHM.View.AddUserView;
 import com.vladkel.eFindMe.IHM.model.UrlFindModel;
 import com.vladkel.eFindMe.IHM.model.UrlFindTableModel;
+import com.vladkel.eFindMe.IHM.model.UserFindTableModel;
 import com.vladkel.eFindMe.graph.Graph;
 import com.vladkel.eFindMe.graph.parsingxml.GraphXML;
 import com.vladkel.eFindMe.search.engine.SearchEngine;
@@ -71,11 +72,14 @@ public class MainWindow
 	
 	private Graph graph = new Graph();
 	
+	// Select User
+	private JLabel chooseUser = new JLabel("Selectionner le client");
+	private JTable tableUsersFind = new JTable();
+    JScrollPane jspUsersFind = new JScrollPane(tableUsersFind);
+    private JButton buttonSelectUser = new JButton("Valider");
+
 	public MainWindow()
-	{
-		//userDetail.setVisible(false);
-		selectUser.setVisible(false);
-		
+	{		
 		SearchEngine.getInstance().confs.loadUsers();
 
 		getCurrentUser();
@@ -90,8 +94,7 @@ public class MainWindow
 		mainFrame.setLayout(new BorderLayout());
 
 		initToolBar();
-		initUserDetail();
-		// initSelectUser();
+	    initSelectUser();
 	    			    
 		mainFrame.getContentPane().add(graph, BorderLayout.CENTER);
 		mainFrame.setVisible(true);
@@ -117,13 +120,50 @@ public class MainWindow
 		selectUser.setBorder(BorderFactory.createLineBorder(Color.black));		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
+		chooseUser.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,Toolkit.getDefaultToolkit().getScreenSize().height / 13));
+		chooseUser.setFont(new Font("Arial", Font.BOLD, 22));
+		
+	    jspUsersFind.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,Toolkit.getDefaultToolkit().getScreenSize().height/2));
+				
+		List<User> usersFind = new ArrayList<User>();
+		
+		for(Integer i = 0 ; i < SearchEngine.getInstance().confs.getUsers().size() ; i++)
+	    {
+	    	 User u = SearchEngine.getInstance().confs.getUsers().get(i.toString());    	 
+	    	 usersFind.add(u);
+	    }
+		
+		tableUsersFind.setModel(new UserFindTableModel(usersFind));
+
+		gbc.gridx = 0;
+	    gbc.gridy = 0;
+	    gbc.gridheight = 2;
+	    gbc.gridwidth = 2;
+	    gbc.anchor = GridBagConstraints.CENTER;
+	    selectUser.add(chooseUser, gbc);
+	    
+	    gbc.gridx = 0;
+	    gbc.gridy = 2;
+	    gbc.gridheight = 2;
+	    gbc.gridwidth = 2;
+	    gbc.anchor = GridBagConstraints.CENTER;
+	    gbc.insets = new Insets(15,0,0,0);
+	    selectUser.add(jspUsersFind, gbc);
+	    
+	    gbc.gridx = 1;
+	    gbc.gridy = 4;
+	    gbc.gridheight = 2;
+	    gbc.gridwidth = 2;
+	    gbc.anchor = GridBagConstraints.EAST;
+	    gbc.insets = new Insets(15,0,0,0);
+	    selectUser.add(buttonSelectUser, gbc);
+	     
 		mainFrame.getContentPane().add(selectUser, BorderLayout.WEST);
-		
-		
 	}
 	
 	private void initUserDetail()
 	{
+		selectUser.setVisible(false);
 		setUser();
 						
 		userDetail.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 4,mainFrame.MAXIMIZED_VERT));
@@ -396,6 +436,19 @@ public class MainWindow
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("addUrl pressed");
 				new AddUrlView(self);
+			}
+		});
+		
+		buttonSelectUser.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row = tableUsersFind.convertRowIndexToModel(tableUsersFind.getSelectedRow());
+	            UserFindTableModel model = (UserFindTableModel)tableUsersFind.getModel();
+
+	            User user = model.getRowAt(row);
+	            
+	            SearchEngine.getInstance().currentUser = user;
+	            initUserDetail();
 			}
 		});
 
