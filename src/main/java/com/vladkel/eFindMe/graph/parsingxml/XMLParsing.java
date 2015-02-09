@@ -39,7 +39,7 @@ public class XMLParsing {
 	
 	public String getXmlFile() {		
 		//User user = new SearchEngineConfs().getUsers().get(indiceUser.toString());
-		User user = SearchEngine.getInstance().confs.getUsers().get(indiceUser.toString());
+		User user = SearchEngine.getInstance().getConfs().getUsers().get(indiceUser.toString());
 		
 		return XML_FILE + "/" + user.getFirstname() + "_" + user.getName() + "/results.xml";
 	}
