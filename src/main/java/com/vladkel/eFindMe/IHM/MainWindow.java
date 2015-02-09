@@ -1,17 +1,8 @@
 package com.vladkel.eFindMe.IHM;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -21,6 +12,7 @@ import javax.swing.*;
 import com.vladkel.eFindMe.IHM.Controller.SearchUserAutoComplete;
 import com.vladkel.eFindMe.IHM.View.AddUrlView;
 import com.vladkel.eFindMe.IHM.View.AddUserView;
+import com.vladkel.eFindMe.IHM.View.BePatientView;
 import com.vladkel.eFindMe.IHM.model.UrlFindModel;
 import com.vladkel.eFindMe.IHM.model.UrlFindTableModel;
 import com.vladkel.eFindMe.IHM.model.UserFindTableModel;
@@ -67,7 +59,8 @@ public class MainWindow
 	private JLabel urlsFindLabel = new JLabel("Urls trouvés :");
 	private JTable tableUrlsFind = new JTable();
     JScrollPane jspUrlsFind = new JScrollPane(tableUrlsFind);
-    
+
+	private JButton search = new JButton("Lancer la recherche");
     private JButton update = new JButton("Modifier");
 	
 	private Graph graph = new Graph();
@@ -79,8 +72,11 @@ public class MainWindow
     private JButton buttonSelectUser = new JButton("Valider");
 
 	public MainWindow()
-	{		
-		SearchEngine.getInstance().confs.loadUsers();
+	{
+		//userDetail.setVisible(false);
+		//selectUser.setVisible(false);
+		
+		SearchEngine.getInstance().getConfs().loadUsers();
 
 		getCurrentUser();
 		
@@ -104,7 +100,7 @@ public class MainWindow
 	private void getCurrentUser()
 	{
 		// Check the last used user
-		SearchEngine.getInstance().currentUser = SearchEngine.getInstance().confs.getUsers().get("1");		
+		SearchEngine.getInstance().currentUser = SearchEngine.getInstance().getConfs().getUsers().get("1");
 	}
 	
 	public MainWindow GetInstance()
@@ -127,9 +123,9 @@ public class MainWindow
 				
 		List<User> usersFind = new ArrayList<User>();
 		
-		for(Integer i = 0 ; i < SearchEngine.getInstance().confs.getUsers().size() ; i++)
+		for(Integer i = 0 ; i < SearchEngine.getInstance().getConfs().getUsers().size() ; i++)
 	    {
-	    	 User u = SearchEngine.getInstance().confs.getUsers().get(i.toString());    	 
+	    	 User u = SearchEngine.getInstance().getConfs().getUsers().get(i.toString());    	 
 	    	 usersFind.add(u);
 	    }
 		
@@ -187,7 +183,8 @@ public class MainWindow
 		listUrlsToLookFor.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,100));
 		
 	    jspUrlsFind.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,Toolkit.getDefaultToolkit().getScreenSize().height/3));
-	    
+
+		search.setBackground(Color.WHITE);
 	    update.setBackground(Color.WHITE);
    
 		gbc.gridx = 0;
@@ -307,8 +304,17 @@ public class MainWindow
 	    gbc.anchor = GridBagConstraints.WEST;
 	    gbc.insets = new Insets(15,0,0,0);
 	    userDetail.add(jspUrlsFind, gbc);
-	    
-	    gbc.gridx = 1;
+
+
+		gbc.gridx = 0;
+		gbc.gridy = 14;
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(15,0,0,0);
+		userDetail.add(search, gbc);
+
+		gbc.gridx = 1;
 	    gbc.gridy = 14;
 	    gbc.gridheight = 1;
 	    gbc.gridwidth = 1;
@@ -328,9 +334,9 @@ public class MainWindow
 	    SearchUserAutoComplete autoSuggestor = new SearchUserAutoComplete(searchUserTextField, mainFrame, null, Color.WHITE, Color.BLACK, Color.RED, 1f);
         List<String> users = new ArrayList<String>();
         
-	    for(Integer i = 0 ; i < SearchEngine.getInstance().confs.getUsers().size() ; i++)
+	    for(Integer i = 0 ; i < SearchEngine.getInstance().getConfs().getUsers().size() ; i++)
 	    {
-	    	 User u = SearchEngine.getInstance().confs.getUsers().get(i.toString());    	 
+	    	 User u = SearchEngine.getInstance().getConfs().getUsers().get(i.toString());
 	    	 users.add(u.getFirstname() + " " + u.getName());
 	    }
 
@@ -399,13 +405,13 @@ public class MainWindow
 		searchUserButton.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 
-		    	  for(Integer i = 0 ; i <  SearchEngine.getInstance().confs.getUsers().size() ; i++)
+		    	  for(Integer i = 0 ; i <  SearchEngine.getInstance().getConfs().getUsers().size() ; i++)
 		  	      {
-		  	    	 User u = SearchEngine.getInstance().confs.getUsers().get(i.toString());
+		  	    	 User u = SearchEngine.getInstance().getConfs().getUsers().get(i.toString());
 		  	    	 
 		  	    	 if(searchUserTextField.getText().replaceAll(" ","").equals((u.getFirstname() + " " + u.getName()).replaceAll(" ","")))
 		  	    	 {
-		  	    		 SearchEngine.getInstance().currentUser = SearchEngine.getInstance().confs.getUsers().get(i.toString());
+		  	    		 SearchEngine.getInstance().currentUser = SearchEngine.getInstance().getConfs().getUsers().get(i.toString());
 		  	    		 setUser();  
 		  	    	 }
 		  	      }
@@ -472,7 +478,6 @@ public class MainWindow
 			}
 		});
 
-		/* TODO */
 		update.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -486,7 +491,6 @@ public class MainWindow
 					if(reply == JOptionPane.YES_OPTION){
 
 						SearchEngine.getInstance().currentUser.removeSelfXMLFiles();
-						//CurrentUser.getInstance().getUser().removeSelfXMLFiles();
 
 						User user = new User();
 
@@ -505,6 +509,7 @@ public class MainWindow
 						 */
 
 						user.writeSelfXMLFiles();
+						SearchEngine.getInstance().updateConf();
 					}
 				}
 				else {
@@ -515,6 +520,13 @@ public class MainWindow
 			}
 		});
 
+		search.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				searchForCurrentUser();
+			}
+		});
+
 
 	}
 
@@ -522,6 +534,33 @@ public class MainWindow
 		return firstNameTextField.getText().length() > 0 &&
 				nameTextField.getText().length() > 0
 				;
+	}
+
+	public void searchForCurrentUser(){
+
+		System.out.println("searchForCurrentUser()");
+
+		try{
+
+			BePatientView bePatient = new BePatientView();
+
+			SearchEngine.getInstance().search(SearchEngine.getInstance().currentUser.getId());
+			SearchEngine.getInstance().updateConf();
+			GetInstance().setUser();
+
+			/*
+			System.out.println("start thread");
+			Thread t = new Thread();
+			t.sleep(5000);
+			System.out.println("close thread");
+			*/
+
+			bePatient.dispatchEvent(new WindowEvent(bePatient, WindowEvent.WINDOW_CLOSING));
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 	}
 
 	/*

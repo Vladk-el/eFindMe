@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.*;
 
 import com.vladkel.eFindMe.IHM.MainWindow;
+import com.vladkel.eFindMe.search.engine.SearchEngine;
 import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
 import com.vladkel.eFindMe.search.engine.model.Url;
 import com.vladkel.eFindMe.search.engine.model.User;
@@ -249,9 +250,12 @@ public class AddUserView extends JFrame{
 		    	  if(isReadyToAddUrl()){
 					  Url url = new Url();
 
-					  Integer indice = userToCreate.getUrlsToLookFor().size();
+					  Integer indice = 0;
 
-					  System.out.println("Indice url : " + indice.toString());
+					  if(userToCreate.getUrlsToLookFor().size() > 0)
+						  indice = Integer.parseInt(userToCreate.getUrlsToLookFor().get(userToCreate.getUrlsToLookFor().size() - 1).getId()) + 1;
+
+					  System.out.println("Indice url : " + indice);
 
 					  url.setId(indice.toString());
 					  url.setName(nameUrlTextField.getText());
@@ -259,6 +263,7 @@ public class AddUserView extends JFrame{
 					  url.setUrl(urlTextField.getText());
 
 					  modelUrlsToLookFor.addElement(url);
+					  cleanUrlLabels();
 				  }
 				  else {
 					  JOptionPane.showMessageDialog(null,
@@ -295,7 +300,7 @@ public class AddUserView extends JFrame{
 		      public void actionPerformed(ActionEvent event){
 
 				  if(isReadyToSave()){
-					  Integer indice = new SearchEngineConfs().getUsers().size();
+					  Integer indice = SearchEngine.getInstance().getConfs().getUsers().size();
 
 					  userToCreate.setId(indice.toString());
 					  userToCreate.setFirstname(firstNameTextField.getText());
@@ -308,7 +313,13 @@ public class AddUserView extends JFrame{
 					  }
 
 					  User.createUser(userToCreate);
-					  close();
+
+					  /**
+					   * Maybe move it to the main windows with an update method
+					   */
+
+					  closeAndLoad();
+
 				  }
 				  else {
 					  JOptionPane.showMessageDialog(null,
@@ -318,6 +329,12 @@ public class AddUserView extends JFrame{
 
 		      }
 		});
+	}
+
+	private void cleanUrlLabels(){
+		nameUrlTextField.setText("");
+		descriptionUrlTextArea.setText("");
+		urlTextField.setText("");
 	}
 
 	private boolean isReadyToAddUrl(){
@@ -334,7 +351,13 @@ public class AddUserView extends JFrame{
 				;
 
 	}
-	private void close(){
+	private void closeAndLoad(){
+		this.setVisible(false);
+
+		SearchEngine.getInstance().updateConf();
+		SearchEngine.getInstance().currentUser = SearchEngine.getInstance().getConfs().getUsers().get(userToCreate.getId());
+		mainWindow.GetInstance().searchForCurrentUser();
+
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 

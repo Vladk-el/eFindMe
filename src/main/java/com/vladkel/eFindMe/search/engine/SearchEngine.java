@@ -20,11 +20,12 @@ public class SearchEngine {
 	
 	private static final Logger log = LoggerFactory.getLogger(SearchEngine.class);
 
-	public SearchEngineConfs confs;
+	private SearchEngineConfs confs;
 	
 	public User currentUser;
 		
 	private static SearchEngine instance = null;
+
 	public static SearchEngine getInstance() {
 			
 		if(instance == null) {
@@ -42,6 +43,10 @@ public class SearchEngine {
 	/**
 	 * Methods
 	 */
+
+	public void updateConf(){
+		confs.loadUsers();
+	}
 	
 	public void search(String id){
 		/**
