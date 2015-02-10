@@ -33,7 +33,6 @@ public class MainWindow
 	private JButton searchUserButton = new JButton("Go");
 	
 	private JPanel userDetail = new JPanel();
-	private JPanel selectUser = new JPanel();
 
 	private JLabel detailLabel = new JLabel("Informations sur le client");
 
@@ -76,6 +75,7 @@ public class MainWindow
 	}	
 	
 	// Select User
+	private JPanel selectUser = new JPanel();
 	private JLabel chooseUser = new JLabel("Selectionner le client");
 	private JTable tableUsersFind = new JTable();
     JScrollPane jspUsersFind = new JScrollPane(tableUsersFind);
@@ -85,7 +85,7 @@ public class MainWindow
 	{
 		SearchEngine.getInstance().getConfs().loadUsers();
 
-		getCurrentUser();
+		// getCurrentUser();
 		
 		mainFrame.setTitle("eFindMe");
 		mainFrame.setExtendedState(mainFrame.MAXIMIZED_BOTH);	
@@ -456,7 +456,13 @@ public class MainWindow
 	            User user = model.getRowAt(row);
 	            
 	            SearchEngine.getInstance().currentUser = user;
-	            initUserDetail();
+	            
+	            selectUser.setVisible(false);
+				userDetail.setVisible(true);
+				initUserDetail();
+				
+				mainFrame.validate();
+				mainFrame.repaint();
 			}
 		});
 
@@ -528,8 +534,18 @@ public class MainWindow
 				searchForCurrentUser();
 			}
 		});
+		
+		consultUsers.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectUser.setVisible(true);
+				userDetail.setVisible(false);
+			    initSelectUser();
 
-
+				mainFrame.validate();
+				mainFrame.repaint();
+			}
+		});
 	}
 
 	private boolean isReadyToUpdate(){
