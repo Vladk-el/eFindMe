@@ -88,7 +88,7 @@ public class SetUser {
 			email.appendChild(doc.createTextNode(user.getEmail()));
 			rootElement.appendChild(email);
 			
-			
+			System.out.println("BEFORE URLSTOLOOKFOR");
 			// urlsToLookFor
 			Element urlsToLookFor = doc.createElement("urlsToLookFor");
 			rootElement.appendChild(urlsToLookFor);
@@ -189,15 +189,14 @@ public class SetUser {
 				edge.appendChild(id);
 				
 				// id1
-				Element name = doc.createElement("name");
+				Element name = doc.createElement("id1");
 				name.appendChild(doc.createTextNode(match.getIdLink()));
 				edge.appendChild(name);
 				
 				// trust
-				Element url = doc.createElement("url");
+				Element url = doc.createElement("trust");
 				url.appendChild(doc.createTextNode(match.getTrust().toString()));
 				edge.appendChild(url);
-
 			}
 			
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();

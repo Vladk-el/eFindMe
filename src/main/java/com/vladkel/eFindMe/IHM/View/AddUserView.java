@@ -51,15 +51,13 @@ public class AddUserView extends JFrame{
     private JButton addUrl = new JButton("Ajouter");
     private JButton deleteUrl = new JButton("-");
     
-    private MainWindow mainWindow;
     private User userToCreate;
 	
-	public AddUserView(MainWindow mainWindow) {
+	public AddUserView() {
 		setLayout();
 		events();
 		
 		userToCreate = new User();
-		this.mainWindow = mainWindow;
 		
 		this.setBackground(Color.WHITE);
 		this.setTitle("Ajouter un utilisateur");
@@ -356,7 +354,7 @@ public class AddUserView extends JFrame{
 
 		SearchEngine.getInstance().updateConf();
 		SearchEngine.getInstance().currentUser = SearchEngine.getInstance().getConfs().getUsers().get(userToCreate.getId());
-		mainWindow.GetInstance().searchForCurrentUser();
+		MainWindow.getInstance().searchForCurrentUser();
 
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}

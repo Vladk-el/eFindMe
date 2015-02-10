@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.vladkel.eFindMe.IHM.View.UpdateTrustView;
 import com.vladkel.eFindMe.graph.parsingxml.GraphXML;
 import com.vladkel.eFindMe.graph.transformer.GraphEdgeColor;
 import com.vladkel.eFindMe.graph.transformer.GraphNodeColor;
@@ -76,7 +77,7 @@ public class Graph extends JPanel {
 		vv.addGraphMouseListener(new GraphMouseListener() {
             public void graphClicked(Object v, MouseEvent me) {
                 if (me.getButton() == MouseEvent.BUTTON1 && me.getClickCount() == 2) {
-                    System.out.println("Double clicked "+ v);
+                    UpdateTrustView utv = new UpdateTrustView((Url)v);
                 }
                 me.consume();
             }

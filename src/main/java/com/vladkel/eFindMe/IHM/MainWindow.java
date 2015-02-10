@@ -65,6 +65,16 @@ public class MainWindow
 	
 	private Graph graph = new Graph();
 	
+	private static MainWindow instance = null;
+	public static MainWindow getInstance() {
+			
+		if(instance == null) {
+			instance = new MainWindow();
+	    }
+			
+		return instance;
+	}	
+	
 	// Select User
 	private JLabel chooseUser = new JLabel("Selectionner le client");
 	private JTable tableUsersFind = new JTable();
@@ -73,9 +83,6 @@ public class MainWindow
 
 	public MainWindow()
 	{
-		//userDetail.setVisible(false);
-		//selectUser.setVisible(false);
-		
 		SearchEngine.getInstance().getConfs().loadUsers();
 
 		getCurrentUser();
@@ -101,11 +108,6 @@ public class MainWindow
 	{
 		// Check the last used user
 		SearchEngine.getInstance().currentUser = SearchEngine.getInstance().getConfs().getUsers().get("1");
-	}
-	
-	public MainWindow GetInstance()
-	{
-		return this;
 	}
 	
 	private void initSelectUser()
@@ -398,7 +400,7 @@ public class MainWindow
 	{
 		addUser.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
-		    	  AddUserView auv = new AddUserView(GetInstance());
+		    	  AddUserView auv = new AddUserView();
 		      }
 		    });
 		
@@ -546,7 +548,7 @@ public class MainWindow
 
 			SearchEngine.getInstance().search(SearchEngine.getInstance().currentUser.getId());
 			SearchEngine.getInstance().updateConf();
-			GetInstance().setUser();
+			this.setUser();
 
 			/*
 			System.out.println("start thread");
