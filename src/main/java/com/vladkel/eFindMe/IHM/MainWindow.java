@@ -64,6 +64,8 @@ public class MainWindow
 	
 	private Graph graph = new Graph();
 	
+	private	SearchUserAutoComplete autoSuggestor = new SearchUserAutoComplete(searchUserTextField, mainFrame, null, Color.WHITE, Color.BLACK, Color.RED, 1f);
+	
 	private static MainWindow instance = null;
 	public static MainWindow getInstance() {
 			
@@ -160,7 +162,7 @@ public class MainWindow
 	}
 	
 	private void initUserDetail()
-	{
+	{		
 		selectUser.setVisible(false);
 		setUser();
 						
@@ -186,6 +188,8 @@ public class MainWindow
 		
 	    jspUrlsFind.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/5,Toolkit.getDefaultToolkit().getScreenSize().height/3));
 
+	    
+	    
 		search.setBackground(Color.WHITE);
 	    update.setBackground(Color.WHITE);
    
@@ -333,7 +337,6 @@ public class MainWindow
   		  		
 		graph.initGraph();
 		
-	    SearchUserAutoComplete autoSuggestor = new SearchUserAutoComplete(searchUserTextField, mainFrame, null, Color.WHITE, Color.BLACK, Color.RED, 1f);
         List<String> users = new ArrayList<String>();
         
 	    for(Integer i = 0 ; i < SearchEngine.getInstance().getConfs().getUsers().size() ; i++)
