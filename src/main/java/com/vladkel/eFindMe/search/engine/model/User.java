@@ -1,6 +1,5 @@
 package com.vladkel.eFindMe.search.engine.model;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

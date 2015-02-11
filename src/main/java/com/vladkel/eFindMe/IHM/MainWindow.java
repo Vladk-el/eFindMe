@@ -2,7 +2,6 @@ package com.vladkel.eFindMe.IHM;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -19,7 +18,6 @@ import com.vladkel.eFindMe.IHM.model.UserFindTableModel;
 import com.vladkel.eFindMe.graph.Graph;
 import com.vladkel.eFindMe.graph.parsingxml.GraphXML;
 import com.vladkel.eFindMe.search.engine.SearchEngine;
-import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
 import com.vladkel.eFindMe.search.engine.model.Url;
 import com.vladkel.eFindMe.search.engine.model.User;
 
@@ -562,22 +560,7 @@ public class MainWindow
 		System.out.println("searchForCurrentUser()");
 
 		try{
-
 			BePatientView bePatient = new BePatientView();
-
-			SearchEngine.getInstance().search(SearchEngine.getInstance().currentUser.getId());
-			SearchEngine.getInstance().updateConf();
-			this.setUser();
-
-			/*
-			System.out.println("start thread");
-			Thread t = new Thread();
-			t.sleep(5000);
-			System.out.println("close thread");
-			*/
-
-			bePatient.dispatchEvent(new WindowEvent(bePatient, WindowEvent.WINDOW_CLOSING));
-
 		}catch(Exception e){
 			e.printStackTrace();
 		}

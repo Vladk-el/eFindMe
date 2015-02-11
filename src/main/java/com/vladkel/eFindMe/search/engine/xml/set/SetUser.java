@@ -88,7 +88,6 @@ public class SetUser {
 			email.appendChild(doc.createTextNode(user.getEmail()));
 			rootElement.appendChild(email);
 			
-			System.out.println("BEFORE URLSTOLOOKFOR");
 			// urlsToLookFor
 			Element urlsToLookFor = doc.createElement("urlsToLookFor");
 			rootElement.appendChild(urlsToLookFor);
@@ -128,8 +127,8 @@ public class SetUser {
 			StreamResult result = new StreamResult(new File(getFullPath() + "user.xml"));
 	 
 			transformer.transform(source, result);
-	 
-			System.out.println("File user.xml saved!");
+
+			log.info("File user.xml saved for user " + user.getName());
 			
 			return true;
 		}catch(Exception e){
@@ -207,8 +206,8 @@ public class SetUser {
 			StreamResult result = new StreamResult(new File(getFullPath() + "results.xml"));
 	 
 			transformer.transform(source, result);
-	 
-			System.out.println("File results.xml saved!");
+
+			log.info("File results.xml saved for user " + user.getName());
 			
 			return true;
 		}catch(Exception e){

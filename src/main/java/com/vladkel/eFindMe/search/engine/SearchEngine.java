@@ -1,5 +1,6 @@
 package com.vladkel.eFindMe.search.engine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +60,9 @@ public class SearchEngine {
 		BingSearch bing = new BingSearch(user.getName() + " " + user.getFirstname());
 		
 		List<Result> results = bing.getResults();
-		
+		user.setUrls(new HashMap<String, Url>());
+		user.setMatches(new ArrayList<Match>());
+
 		for(Result result : results){
 			try{
 				detailledSearch(user, result);
@@ -69,6 +72,7 @@ public class SearchEngine {
 			
 		}
 		log.info("Search finished !!!");
+		log.info(user.getUrls().size() + " urls founded");
 	}
 	
 	private void detailledSearch(User user, Result result) throws Exception{
@@ -123,15 +127,6 @@ public class SearchEngine {
 			if(addToMap)
 				user.getUrls().put(newUrl.getId(), newUrl);
 		}
-	}
-	
-	/**
-	 * Maybe not here
-	 */
-	public void showGraph(String id){
-		/**
-		 * Show the people's graph
-		 */
 	}
 	
 	

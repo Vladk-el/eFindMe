@@ -1,7 +1,6 @@
 package com.vladkel.eFindMe;
 
 import com.vladkel.eFindMe.IHM.MainWindow;
-import com.vladkel.eFindMe.IHM.View.BePatientView;
 
 public class EFindMe {
 	

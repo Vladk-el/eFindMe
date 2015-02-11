@@ -1,35 +1,37 @@
-<results> <!-- results.xml -->
-  <links>
-    <link>
-      <id>1</id>
-      <name>Name 2</name>
-      <url>url 1</url>
-    </link>
-
-    <link>
-      <id>2</id>
-      <name>Name 2</name>
-      <url>url 2</url>
-    </link>
-
-    <link>
-      <id>3</id>
-      <name>Name 3</name>
-      <url>url 3</url>
-    </link>
-</links>
-
-  <graph>
-    <edge>
-      <id>1</id>
-      <id1>2</id1>
-      <trust>Bad</trust>
-    </edge>
-
-    <edge>
-      <id>1</id>
-      <id1>3</id1>
-      <trust>Bad</trust>
-    </edge>
-  </graph>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<results>
+    <links>
+        <link>
+            <id>8944fb78-06d3-40ac-b9ae-db2f53a0fa3c</id>
+            <name>TAILLEFER Guillaume - Google+</name>
+            <url>https://plus.google.com/113711793939716524760</url>
+        </link>
+        <link>
+            <id>92a7b4c5-6217-47ce-8ce4-d9447e694920</id>
+            <name>Eliott Laversin - Google+</name>
+            <url>https://plus.google.com/114380866035127198885/posts</url>
+        </link>
+    </links>
+    <graph>
+        <edge>
+            <id>0</id>
+            <id1>92a7b4c5-6217-47ce-8ce4-d9447e694920</id1>
+            <trust>Unknown</trust>
+        </edge>
+        <edge>
+            <id>1</id>
+            <id1>92a7b4c5-6217-47ce-8ce4-d9447e694920</id1>
+            <trust>Unknown</trust>
+        </edge>
+        <edge>
+            <id>0</id>
+            <id1>8944fb78-06d3-40ac-b9ae-db2f53a0fa3c</id1>
+            <trust>Unknown</trust>
+        </edge>
+        <edge>
+            <id>1</id>
+            <id1>8944fb78-06d3-40ac-b9ae-db2f53a0fa3c</id1>
+            <trust>Unknown</trust>
+        </edge>
+    </graph>
 </results>

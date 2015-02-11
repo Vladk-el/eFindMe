@@ -9,13 +9,11 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.List;
 
 import javax.swing.*;
 
 import com.vladkel.eFindMe.IHM.MainWindow;
 import com.vladkel.eFindMe.search.engine.SearchEngine;
-import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
 import com.vladkel.eFindMe.search.engine.model.Url;
 import com.vladkel.eFindMe.search.engine.model.User;
 

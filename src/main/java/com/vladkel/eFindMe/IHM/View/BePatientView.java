@@ -1,14 +1,14 @@
 package com.vladkel.eFindMe.IHM.View;
 
-import javax.imageio.ImageIO;
+import com.vladkel.eFindMe.IHM.MainWindow;
+import com.vladkel.eFindMe.search.engine.SearchEngine;
+
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URL;
 
-/**
- * Created by eliott on 09/02/15.
- */
+
 public class BePatientView extends JFrame {
 
     // http://www.golfllnnews.com/wp-content/uploads/2013/04/Pictures-loading.jpg
@@ -16,10 +16,9 @@ public class BePatientView extends JFrame {
     // https://www.shipco.com/include/images/shipco/loading1.gif
 
     public BePatientView() {
-        Image image = null;
+        URL url = null;
         try {
-            URL url = new URL("http://files.dametenebra.com/eFindMe/Loading-Gif-5.gif");
-            image = ImageIO.read(url);
+            url = new URL("http://www.golfllnnews.com/wp-content/uploads/2013/04/Pictures-loading.jpg");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,8 +26,20 @@ public class BePatientView extends JFrame {
         setTitle("Veuillez patienter durant la recherche de l'utilisateur");
         setSize(300, 300);
         setLocationRelativeTo(null);
-        JLabel label = new JLabel(new ImageIcon(image));
+        JLabel label = new JLabel(new ImageIcon(url), JLabel.CENTER);
         add(label);
         setVisible(true);
+        pack();
+
+        final BePatientView self = this;
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() {
+                SearchEngine.getInstance().search(SearchEngine.getInstance().currentUser.getId());
+                SearchEngine.getInstance().currentUser.writeSelfXMLFiles();
+                SearchEngine.getInstance().updateConf();
+                MainWindow.getInstance().setUser();
+                self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));
+            }
+        }) ;
     }
 }
