@@ -41,5 +41,7 @@ public class BePatientView extends JFrame {
                 self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));
             }
         }) ;
+
+        // https://tips4java.wordpress.com/2009/06/21/animated-icon/
     }
 }

@@ -9,7 +9,7 @@ public class BingSearchIT {
 
 	public static void main(String [] args){
 		
-		BingSearch bs = new BingSearch();
+		BingSearch bs = new BingSearch("Da Costa Oliveira Diego");
 		
 		List<Result> results = bs.getResults();
 		
