@@ -41,7 +41,7 @@ public class SetUser {
 	private boolean createRepertory(){
 		try{
 			fullPath = getPath() + 
-					user.getFirstname().toLowerCase() + 
+					user.getFirstname().toLowerCase().replaceAll(" ", "") + 
 					"_" + 
 					user.getName().toLowerCase().replaceAll(" ", "") + 
 					"/";

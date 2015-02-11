@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <user>
     <id>1</id>
-    <name>DaCosta</name>
+    <name>Da Costa Oliveira</name>
     <firstname>Diego</firstname>
     <email>diego.dacosta@hotmail.fr</email>
     <urlsToLookFor>
@@ -9,7 +9,7 @@
             <id>0</id>
             <name>Facebook Diego Da Costa</name>
             <description>Page Facebook de Diego Da Costa</description>
-            <url>https://www.facebook.com/diego93700</url>
+            <url>https://fr-fr.facebook.com/diego93700</url>
         </url>
         <url>
             <id>1</id>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<results>
+    <links>
+        <link>
+            <id>e60923ed-8d3d-41b0-9871-7df47a1177fe</id>
+            <name>Diego Da Costa Oliveira | Facebook</name>
+            <url>https://fr-fr.facebook.com/diego93700</url>
+        </link>
+        <link>
+            <id>18f95919-008c-4d05-83f0-ead3a5c4ffc3</id>
+            <name>Diego Wiliam da Costa Oliveira - Google+</name>
+            <url>https://plus.google.com/114982579333568199220</url>
+        </link>
+        <link>
+            <id>1da129bb-c1a7-4d49-baa6-7e88af45d492</id>
+            <name>Diogo da Costa Oliveira - Shots | Passes | Skills | Goals ...</name>
+            <url>http://www.youtube.com/watch?v=IcLUGbuuBb0</url>
+        </link>
+        <link>
+            <id>6448abae-126e-43f1-9d82-8bff4fb1f430</id>
+            <name>Lateral - Diogo da Costa Oliveira - YouTube</name>
+            <url>http://www.youtube.com/watch?v=6dW5fGO034A</url>
+        </link>
+    </links>
+    <graph>
+        <edge>
+            <id>0</id>
+            <id1>e60923ed-8d3d-41b0-9871-7df47a1177fe</id1>
+            <trust>Trusted</trust>
+        </edge>
+        <edge>
+            <id>0</id>
+            <id1>18f95919-008c-4d05-83f0-ead3a5c4ffc3</id1>
+            <trust>Unknown</trust>
+        </edge>
+        <edge>
+            <id>0</id>
+            <id1>1da129bb-c1a7-4d49-baa6-7e88af45d492</id1>
+            <trust>Unknown</trust>
+        </edge>
+        <edge>
+            <id>1</id>
+            <id1>1da129bb-c1a7-4d49-baa6-7e88af45d492</id1>
+            <trust>Unknown</trust>
+        </edge>
+        <edge>
+            <id>0</id>
+            <id1>6448abae-126e-43f1-9d82-8bff4fb1f430</id1>
+            <trust>Unknown</trust>
+        </edge>
+    </graph>
+</results>

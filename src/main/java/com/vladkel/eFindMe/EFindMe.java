@@ -9,5 +9,6 @@ public class EFindMe {
 		System.out.println("Hello eFindMe !");
 
 		MainWindow.getInstance();
+		
 	}
 }

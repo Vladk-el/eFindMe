@@ -76,12 +76,6 @@ public class SearchEngine {
 	}
 	
 	private void detailledSearch(User user, Result result) throws Exception{
-		/**
-		 * Load html page one by one and check if it contains given urls
-		 */
-		
-		String response = null;
-		GetHelper helper = null;
 		
 		Url newUrl = new Url();
 			newUrl.setId(result.getID());
@@ -89,23 +83,131 @@ public class SearchEngine {
 			newUrl.setDescription(result.getDescription());
 			newUrl.setUrl(result.getUrl());
 			
-		if(result.getUrl().startsWith("http")){
+		log.info("URL TESTED ==> " + newUrl);
+			
+		boolean addToMap = false;
+		boolean needToContinue = true;
+		
+		String response = null;
+		
+		for(Url url : user.getUrlsToLookFor()){
+			
+			// Check Url
+			response = newUrl.getUrl().toLowerCase();
+			if(response.contains(url.getUrl().toLowerCase()) || response.equalsIgnoreCase(url.getUrl())){
+				user.getMatches().add(new Match(
+						url.getId(),
+						newUrl.getId(),
+						Trust.Trusted
+						));
+				addToMap = true;
+				needToContinue = false;
+			}
+			
+			if(needToContinue){
+				// Check Name
+				response = newUrl.getName().toLowerCase();
+				if(response.contains(url.getUrl().toLowerCase())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Trusted
+							));
+					addToMap = true;
+					needToContinue = false;
+				}
+				else if(response.contains(user.getEmail().toLowerCase())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Unknown
+							));
+					addToMap = true;
+					needToContinue = false;
+				}
+				else if(response.contains(user.getName().toLowerCase()) &&
+						response.contains(user.getFirstname().toLowerCase())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Unknown
+							));
+					addToMap = true;
+					needToContinue = false;
+				}
+			}
+			
+			if(needToContinue){
+				// Check Description
+				response = newUrl.getDescription().toLowerCase();
+				if(response.contains(url.getUrl().toLowerCase())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Trusted
+							));
+					addToMap = true;
+					needToContinue = false;
+				}
+				else if(response.contains(user.getEmail().toLowerCase())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Unknown
+							));
+					addToMap = true;
+					needToContinue = false;
+				}
+				else if(response.contains(user.getName().toLowerCase()) &&
+						response.contains(user.getFirstname().toLowerCase())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Unknown
+							));
+					addToMap = true;
+					needToContinue = false;
+				}
+			}
+	
+		}
+		
+		if(needToContinue)
+			veryDetailledSearch(user, newUrl);
+		else if(addToMap){
+			user.getUrls().put(newUrl.getId(), newUrl);
+			log.info("MATCH \\O/ --> " + newUrl);
+		}
+		
+	}
+	
+	private void veryDetailledSearch(User user, Url newUrl){
+		
+		/**
+		 * Load html page one by one and check if it contains given urls
+		 */
+		
+		String response = null;
+		GetHelper helper = null;
+		
+		if(newUrl.getUrl().startsWith("http")){
 			helper = new GetHelper(10000);
 		}
-		else if(result.getUrl().startsWith("https")){
+		else if(newUrl.getUrl().startsWith("https")){
 			helper = new com.vladkel.eFindMe.utils.ws.https.GetHelper(10000);
 		}
 		
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("Content-type", "text/html");
 		
-		response = helper.get(result.getUrl(), headers, false);
+		response = helper.get(newUrl.getUrl(), headers, false);
 		
 		if(response != null){
 			boolean addToMap = false;
+			response = response.toLowerCase();
 			
 			for(Url url : user.getUrlsToLookFor()){
-				if(response.contains(url.getUrl())){
+				if(response.contains(url.getUrl().toLowerCase())){
 					user.getMatches().add(new Match(
 							url.getId(),
 							newUrl.getId(),
@@ -113,8 +215,16 @@ public class SearchEngine {
 							));
 					addToMap = true;
 				}
-				else if(response.contains(user.getName() + " " + user.getFirstname()) ||
-						response.contains(user.getFirstname() + " " + user.getName())){
+				else if(response.contains(user.getEmail().toLowerCase())){
+					user.getMatches().add(new Match(
+							url.getId(),
+							newUrl.getId(),
+							Trust.Unknown
+							));
+					addToMap = true;
+				}
+				else if(response.contains(user.getName().toLowerCase()) &&
+						response.contains(user.getFirstname().toLowerCase())){
 					user.getMatches().add(new Match(
 							url.getId(),
 							newUrl.getId(),
@@ -124,8 +234,11 @@ public class SearchEngine {
 				}
 			}
 			
-			if(addToMap)
+			if(addToMap){
 				user.getUrls().put(newUrl.getId(), newUrl);
+				log.info("MATCH \\O/ --> " + newUrl);
+			}
+				
 		}
 	}
 	

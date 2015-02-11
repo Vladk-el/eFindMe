@@ -27,10 +27,13 @@ public class BePatientView extends JFrame {
         setSize(300, 300);
         setLocationRelativeTo(null);
         JLabel label = new JLabel(new ImageIcon(url), JLabel.CENTER);
+        /*ImageIcon image = new ImageIcon(getClass().getResource("/img/load.gif"));
+        JLabel label = new JLabel(image, JLabel.CENTER);*/
         add(label);
         setVisible(true);
         pack();
 
+        
         final BePatientView self = this;
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
@@ -41,7 +44,8 @@ public class BePatientView extends JFrame {
                 self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));
             }
         }) ;
-
-        // https://tips4java.wordpress.com/2009/06/21/animated-icon/
+		
+        
+        // http://stackoverflow.com/questions/11648696/why-gif-animation-doesnt-animate-when-using-it-in-paintcomponent
     }
 }
