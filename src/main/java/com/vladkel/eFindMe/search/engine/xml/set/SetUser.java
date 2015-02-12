@@ -102,7 +102,7 @@ public class SetUser {
 				urlId.appendChild(doc.createTextNode(myUrl.getId()));
 				url.appendChild(urlId);
 				
-				// urlId
+				// urlName
 				Element urlName = doc.createElement("name");
 				urlName.appendChild(doc.createTextNode(myUrl.getName()));
 				url.appendChild(urlName);
@@ -171,6 +171,11 @@ public class SetUser {
 				Element url = doc.createElement("url");
 				url.appendChild(doc.createTextNode(myUrl.getUrl()));
 				link.appendChild(url);
+
+                // trust
+                Element trust = doc.createElement("trust");
+                trust.appendChild(doc.createTextNode(myUrl.getTrust().toString()));
+                link.appendChild(trust);
 			}
 			
 			// graph
@@ -193,9 +198,9 @@ public class SetUser {
 				edge.appendChild(name);
 				
 				// trust
-				Element url = doc.createElement("trust");
-				url.appendChild(doc.createTextNode(match.getTrust().toString()));
-				edge.appendChild(url);
+				Element trust = doc.createElement("trust");
+                trust.appendChild(doc.createTextNode(match.getTrust().toString()));
+				edge.appendChild(trust);
 			}
 			
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();

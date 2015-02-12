@@ -82,6 +82,7 @@ public class SearchEngine {
 			newUrl.setName(result.getTitle());
 			newUrl.setDescription(result.getDescription());
 			newUrl.setUrl(result.getUrl());
+            newUrl.setTrust(Trust.Unknown);
 			
 		log.info("URL TESTED ==> " + newUrl);
 			
@@ -103,8 +104,7 @@ public class SearchEngine {
 				addToMap = true;
 				needToContinue = false;
 			}
-            else if(response.contains(user.getName().toLowerCase().replaceAll(" ", "") + "." + user.getFirstname().toLowerCase().replaceAll(" ", "") ) ||
-                    response.contains(user.getFirstname().toLowerCase().replaceAll(" ", "")  + "." + user.getName().toLowerCase().replaceAll(" ", "") )){
+            else if(newUrl.getName().toLowerCase().contains(url.getUrl().toLowerCase())){
                 user.getMatches().add(new Match(
                         url.getId(),
                         newUrl.getId(),
@@ -113,77 +113,50 @@ public class SearchEngine {
                 addToMap = true;
                 needToContinue = false;
             }
-			
-			if(needToContinue){
-				// Check Name
-				response = newUrl.getName().toLowerCase();
-				if(response.contains(url.getUrl().toLowerCase())){
-					user.getMatches().add(new Match(
-							url.getId(),
-							newUrl.getId(),
-							Trust.Trusted
-							));
-					addToMap = true;
-					needToContinue = false;
-				}
-				else if(response.contains(user.getEmail().toLowerCase())){
-					user.getMatches().add(new Match(
-							url.getId(),
-							newUrl.getId(),
-							Trust.Unknown
-							));
-					addToMap = true;
-					needToContinue = false;
-				}
-				else if(response.contains(user.getName().toLowerCase()) &&
-						response.contains(user.getFirstname().toLowerCase())){
-					user.getMatches().add(new Match(
-							url.getId(),
-							newUrl.getId(),
-							Trust.Unknown
-							));
-					addToMap = true;
-					needToContinue = false;
-				}
-			}
-			
-			if(needToContinue){
-				// Check Description
-				response = newUrl.getDescription().toLowerCase();
-				if(response.contains(url.getUrl().toLowerCase())){
-					user.getMatches().add(new Match(
-							url.getId(),
-							newUrl.getId(),
-							Trust.Trusted
-							));
-					addToMap = true;
-					needToContinue = false;
-				}
-				else if(response.contains(user.getEmail().toLowerCase())){
-					user.getMatches().add(new Match(
-							url.getId(),
-							newUrl.getId(),
-							Trust.Unknown
-							));
-					addToMap = true;
-					needToContinue = false;
-				}
-				else if(response.contains(user.getName().toLowerCase() + " " + user.getFirstname().toLowerCase()) ||
-                        response.contains(user.getFirstname().toLowerCase() + " " + user.getName().toLowerCase())){
-					user.getMatches().add(new Match(
-							url.getId(),
-							newUrl.getId(),
-							Trust.Unknown
-							));
-					addToMap = true;
-					needToContinue = false;
-				}
-			}
-	
+            else if(newUrl.getDescription().toLowerCase().contains(url.getUrl().toLowerCase())){
+                user.getMatches().add(new Match(
+                        url.getId(),
+                        newUrl.getId(),
+                        Trust.Trusted
+                ));
+                addToMap = true;
+                needToContinue = false;
+            }
 		}
+
+        // Check Url
+        response = newUrl.getUrl().toLowerCase();
+        if(response.contains(user.getName().toLowerCase().replaceAll(" ", "") + "." + user.getFirstname().toLowerCase().replaceAll(" ", "") ) ||
+                response.contains(user.getFirstname().toLowerCase().replaceAll(" ", "")  + "." + user.getName().toLowerCase().replaceAll(" ", "") )){
+            addToMap = true;
+        }
+
+        if(needToContinue){
+            // Check Name
+            response = newUrl.getName().toLowerCase();
+            if(response.contains(user.getEmail().toLowerCase())){
+                addToMap = true;
+            }
+            else if(response.contains(user.getName().toLowerCase()) &&
+                    response.contains(user.getFirstname().toLowerCase())){
+                addToMap = true;
+            }
+        }
+
+        if(needToContinue){
+            // Check Description
+            response = newUrl.getDescription().toLowerCase();
+            if(response.contains(user.getEmail().toLowerCase())){
+                addToMap = true;
+            }
+            else if(response.contains(user.getName().toLowerCase() + " " + user.getFirstname().toLowerCase()) ||
+                    response.contains(user.getFirstname().toLowerCase() + " " + user.getName().toLowerCase())){
+                addToMap = true;
+            }
+        }
 		
 		if(needToContinue)
-			veryDetailledSearch(user, newUrl);
+			veryDetailledSearch(user, newUrl, addToMap);
 		else if(addToMap){
 			user.getUrls().put(newUrl.getId(), newUrl);
 			log.info("MATCH \\O/ --> " + newUrl);
@@ -191,11 +164,7 @@ public class SearchEngine {
 		
 	}
 	
-	private void veryDetailledSearch(User user, Url newUrl){
-		
-		/**
-		 * Load html page one by one and check if it contains given urls
-		 */
+	private void veryDetailledSearch(User user, Url newUrl, boolean addToMap){
 		
 		String response = null;
 		GetHelper helper = null;
@@ -213,7 +182,6 @@ public class SearchEngine {
 		response = helper.get(newUrl.getUrl(), headers, false);
 		
 		if(response != null){
-			boolean addToMap = false;
 			response = response.toLowerCase();
 			
 			for(Url url : user.getUrlsToLookFor()){
@@ -225,24 +193,15 @@ public class SearchEngine {
 							));
 					addToMap = true;
 				}
-				else if(response.contains(user.getEmail().toLowerCase())){
-					user.getMatches().add(new Match(
-							url.getId(),
-							newUrl.getId(),
-							Trust.Unknown
-							));
-					addToMap = true;
-				}
-				else if(response.contains(user.getName().toLowerCase() + " " + user.getFirstname().toLowerCase()) ||
-						response.contains(user.getFirstname().toLowerCase() + " " + user.getName().toLowerCase())){
-					user.getMatches().add(new Match(
-							url.getId(),
-							newUrl.getId(),
-							Trust.Unknown
-							));
-					addToMap = true;
-				}
 			}
+
+            if(response.contains(user.getEmail().toLowerCase())){
+                addToMap = true;
+            }
+            else if(response.contains(user.getName().toLowerCase() + " " + user.getFirstname().toLowerCase()) ||
+                    response.contains(user.getFirstname().toLowerCase() + " " + user.getName().toLowerCase())){
+                addToMap = true;
+            }
 			
 			if(addToMap){
 				user.getUrls().put(newUrl.getId(), newUrl);

@@ -72,6 +72,9 @@ public class UrlsHandler implements ContentHandler {
 				if(localName.equalsIgnoreCase("url")){
 					url.setUrl(buffer.toString());
 				}
+                if(localName.equalsIgnoreCase("trust")){
+                    url.setTrust(buffer.toString());
+                }
 			}
 			
 			// Users urls

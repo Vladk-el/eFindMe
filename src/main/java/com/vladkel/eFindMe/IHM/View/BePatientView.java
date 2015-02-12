@@ -29,8 +29,6 @@ public class BePatientView extends JFrame {
         setAlwaysOnTop (true);
         setUndecorated(true);
         JLabel label = new JLabel(new ImageIcon(url), JLabel.CENTER);
-        /*ImageIcon image = new ImageIcon(getClass().getResource("/img/load.gif"));
-        JLabel label = new JLabel(image, JLabel.CENTER);*/
         add(label);
         setVisible(true);
         pack();
@@ -50,17 +48,5 @@ public class BePatientView extends JFrame {
         });
         t.start();
 
-        /*SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                SearchEngine.getInstance().search(SearchEngine.getInstance().currentUser.getId());
-                SearchEngine.getInstance().currentUser.writeSelfXMLFiles();
-                SearchEngine.getInstance().updateConf();
-                MainWindow.getInstance().setUser();
-                self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));
-            }
-        }) ;*/
-		
-        
-        // http://stackoverflow.com/questions/11648696/why-gif-animation-doesnt-animate-when-using-it-in-paintcomponent
     }
 }
