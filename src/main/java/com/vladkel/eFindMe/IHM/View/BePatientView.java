@@ -18,7 +18,7 @@ public class BePatientView extends JFrame {
     public BePatientView() {
         URL url = null;
         try {
-            url = new URL("http://www.golfllnnews.com/wp-content/uploads/2013/04/Pictures-loading.jpg");
+            url = new URL("http://files.dametenebra.com/eFindMe/Loading-Gif-5.gif");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,16 +26,20 @@ public class BePatientView extends JFrame {
         setTitle("Veuillez patienter durant la recherche de l'utilisateur");
         setSize(300, 300);
         setLocationRelativeTo(null);
+        setAlwaysOnTop (true);
+        setUndecorated(true);
         JLabel label = new JLabel(new ImageIcon(url), JLabel.CENTER);
         /*ImageIcon image = new ImageIcon(getClass().getResource("/img/load.gif"));
         JLabel label = new JLabel(image, JLabel.CENTER);*/
         add(label);
         setVisible(true);
         pack();
+        setLocationRelativeTo(null);
 
         
         final BePatientView self = this;
-        SwingUtilities.invokeLater(new Runnable() {
+
+        Thread t = new Thread(new Runnable() {
             @Override public void run() {
                 SearchEngine.getInstance().search(SearchEngine.getInstance().currentUser.getId());
                 SearchEngine.getInstance().currentUser.writeSelfXMLFiles();
@@ -43,7 +47,18 @@ public class BePatientView extends JFrame {
                 MainWindow.getInstance().setUser();
                 self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));
             }
-        }) ;
+        });
+        t.start();
+
+        /*SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() {
+                SearchEngine.getInstance().search(SearchEngine.getInstance().currentUser.getId());
+                SearchEngine.getInstance().currentUser.writeSelfXMLFiles();
+                SearchEngine.getInstance().updateConf();
+                MainWindow.getInstance().setUser();
+                self.dispatchEvent(new WindowEvent(self, WindowEvent.WINDOW_CLOSING));
+            }
+        }) ;*/
 		
         
         // http://stackoverflow.com/questions/11648696/why-gif-animation-doesnt-animate-when-using-it-in-paintcomponent

@@ -58,7 +58,7 @@ public class BingSearch {
 		try {
 			String bingURL = "https://api.datamarket.azure.com/Bing/SearchWeb/Web?Query=%27" + 
 					 URLEncoder.encode(query, "UTF-8") + 
-					 "%27&$format=json";
+					 "%27&Market=%27fr-FR%27&$format=json";
             HttpGet httpget = new HttpGet(bingURL);
             httpget.setHeader("Authorization", "Basic " + accountKeyEnc);
 

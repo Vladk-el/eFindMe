@@ -103,6 +103,16 @@ public class SearchEngine {
 				addToMap = true;
 				needToContinue = false;
 			}
+            else if(response.contains(user.getName().toLowerCase().replaceAll(" ", "") + "." + user.getFirstname().toLowerCase().replaceAll(" ", "") ) ||
+                    response.contains(user.getFirstname().toLowerCase().replaceAll(" ", "")  + "." + user.getName().toLowerCase().replaceAll(" ", "") )){
+                user.getMatches().add(new Match(
+                        url.getId(),
+                        newUrl.getId(),
+                        Trust.Trusted
+                ));
+                addToMap = true;
+                needToContinue = false;
+            }
 			
 			if(needToContinue){
 				// Check Name
@@ -158,8 +168,8 @@ public class SearchEngine {
 					addToMap = true;
 					needToContinue = false;
 				}
-				else if(response.contains(user.getName().toLowerCase()) &&
-						response.contains(user.getFirstname().toLowerCase())){
+				else if(response.contains(user.getName().toLowerCase() + " " + user.getFirstname().toLowerCase()) ||
+                        response.contains(user.getFirstname().toLowerCase() + " " + user.getName().toLowerCase())){
 					user.getMatches().add(new Match(
 							url.getId(),
 							newUrl.getId(),
@@ -191,10 +201,10 @@ public class SearchEngine {
 		GetHelper helper = null;
 		
 		if(newUrl.getUrl().startsWith("http")){
-			helper = new GetHelper(10000);
+			helper = new GetHelper(5000);
 		}
 		else if(newUrl.getUrl().startsWith("https")){
-			helper = new com.vladkel.eFindMe.utils.ws.https.GetHelper(10000);
+			helper = new com.vladkel.eFindMe.utils.ws.https.GetHelper(5000);
 		}
 		
 		Map<String, String> headers = new HashMap<String, String>();
@@ -223,8 +233,8 @@ public class SearchEngine {
 							));
 					addToMap = true;
 				}
-				else if(response.contains(user.getName().toLowerCase()) &&
-						response.contains(user.getFirstname().toLowerCase())){
+				else if(response.contains(user.getName().toLowerCase() + " " + user.getFirstname().toLowerCase()) ||
+						response.contains(user.getFirstname().toLowerCase() + " " + user.getName().toLowerCase())){
 					user.getMatches().add(new Match(
 							url.getId(),
 							newUrl.getId(),
