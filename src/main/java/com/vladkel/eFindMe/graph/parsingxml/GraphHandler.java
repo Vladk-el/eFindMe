@@ -62,8 +62,12 @@ public class GraphHandler implements ContentHandler {
 				link.setUrl(buffer.toString());
 			}
 			
+			if(localName.equalsIgnoreCase("trust")){
+				link.setTrust(buffer.toString());
+			}
+			
 			if(localName.equalsIgnoreCase("link")){
-				GraphXML.getInstance().getUrls().put(Integer.parseInt(link.getId()), link);
+				GraphXML.getInstance().getUrls().put(link.getId(), link);
 			}
 		}
 		

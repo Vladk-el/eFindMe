@@ -22,34 +22,34 @@ public class GraphXML {
 		return instance;
 	}
 	
-	private Map<Integer,Url> urls = new HashMap<Integer,Url>();
+	private Map<String,Url> urls = new HashMap<String,Url>();
 	private List<Match> matches = new ArrayList<Match>();
 		
 	public GraphXML(){
 		super();
 	}
 	
-	public Url getUrl(int indice)
+	public Url getUrl(String indice)
 	{
 		return urls.get(indice);
 	}
 	
-	public Match getMatch(int indiceUrl)
+	public Match getMatch(String indiceUrl)
 	{
 		for(Match m : matches)
 		{
-			if(Integer.parseInt(m.getIdLink()) == indiceUrl)
+			if(m.getIdLink().equals(indiceUrl))
 				return m;
 		}
 		
 		return null;
 	}
 	
-	public Map<Integer,Url> getUrls() {
+	public Map<String,Url> getUrls() {
 		return urls;
 	}
 
-	public void setUrls(Map<Integer,Url> urls) {
+	public void setUrls(Map<String,Url> urls) {
 		this.urls = urls;
 	}
 	
@@ -71,8 +71,8 @@ public class GraphXML {
 	
 	public void showYourself(){
 		
-		for(Entry<Integer, Url> url : urls.entrySet()) {
-		    Integer cle = url.getKey();
+		for(Entry<String, Url> url : urls.entrySet()) {
+		    String cle = url.getKey();
 		    Url valueUrl = url.getValue();
 		    
 		    System.out.println("Id : " + valueUrl.getId());

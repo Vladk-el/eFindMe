@@ -2,6 +2,8 @@ package com.vladkel.eFindMe.IHM.View;
 
 import com.google.gson.Gson;
 import com.vladkel.eFindMe.IHM.MainWindow;
+import com.vladkel.eFindMe.IHM.model.UrlFindModel;
+import com.vladkel.eFindMe.graph.parsingxml.GraphXML;
 import com.vladkel.eFindMe.search.engine.SearchEngine;
 import com.vladkel.eFindMe.search.engine.model.Match;
 import com.vladkel.eFindMe.search.engine.model.Trust;
@@ -14,6 +16,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Map.Entry;
 
 public class UpdateTrustView extends JFrame {
 
@@ -39,7 +43,8 @@ public class UpdateTrustView extends JFrame {
 
         this.setBackground(Color.WHITE);
         this.setTitle("Modifier url de confiance");
-        this.setSize(new Dimension(200,200));
+        this.setSize(new Dimension(350,200));
+        this.setMaximumSize(new Dimension(350,200));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -63,7 +68,7 @@ public class UpdateTrustView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridheight = 1;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         gbc.insets = new Insets(15,5,0,0);
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(displayTrustLabel, gbc);
@@ -71,17 +76,17 @@ public class UpdateTrustView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridheight = 1;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         gbc.insets = new Insets(15,5,0,0);
-        gbc.anchor = GridBagConstraints.EAST;
+        gbc.anchor = GridBagConstraints.CENTER;
         this.add(trustList, gbc);
         
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridheight = 1;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 2;
         gbc.insets = new Insets(15,5,0,0);
-        gbc.anchor = GridBagConstraints.EAST;
+        gbc.anchor = GridBagConstraints.CENTER;
         this.add(updateTrust, gbc);
     }
 
@@ -91,12 +96,14 @@ public class UpdateTrustView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String trustValue = (String)trustList.getSelectedItem();
 				
+				Boolean isMatch = false;
 	    		for(int i = 0 ; i < SearchEngine.getInstance().currentUser.getMatches().size() ; i++)
 	    		{
 	    			Match match = SearchEngine.getInstance().currentUser.getMatches().get(i);
-	    			    			
+	    			    	
 	    			if(match.getIdLink().equals(url.getId()))
 	    			{
+	    				isMatch = true;
 	    				switch(trustValue)
 	    				{
 		    				case "Bad":
@@ -118,6 +125,28 @@ public class UpdateTrustView extends JFrame {
 	    				u.writeSelfXMLFiles();
 	    				
 	    				MainWindow.getInstance().setUser();
+	    			}
+	    		}
+	    		
+	    		if(!isMatch)
+	    		{
+	    			
+	    			for(Entry<String, Url> value : SearchEngine.getInstance().currentUser.getUrls().entrySet()) {
+	    				
+	    			    Url u = value.getValue();
+	    			    
+	    			    if(u.getId().equals(url.getId()))
+	    				{
+	    					System.out.println("URLL EQUALS");
+	    					u.setTrust(trustValue);
+	    					
+	    					User user = new User();
+	    					user = SearchEngine.getInstance().currentUser;
+	        				SearchEngine.getInstance().currentUser.removeSelfXMLFiles();
+	        				user.writeSelfXMLFiles();
+	        				
+	        				MainWindow.getInstance().setUser();
+	    				}
 	    			}
 	    		}
 			}

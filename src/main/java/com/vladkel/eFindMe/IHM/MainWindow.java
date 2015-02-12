@@ -357,7 +357,7 @@ public class MainWindow
 		
 		for(Url url : user.getUrlsToLookFor()) modelUrlsToLookFor.addElement(url);
 		
-		for(Entry<Integer, Url> value : GraphXML.getInstance().getUrls().entrySet()) {
+		for(Entry<String, Url> value : GraphXML.getInstance().getUrls().entrySet()) {
 			
 		    Url url = value.getValue();
 		    

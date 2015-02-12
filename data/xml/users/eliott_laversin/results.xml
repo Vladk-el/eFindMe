@@ -2,34 +2,22 @@
 <results>
     <links>
         <link>
+            <id>e7c109c2-1729-4dcc-8439-68d99b3c6000</id>
+            <name>Qualifies_interdistricts_Bad_duos_clg06 - Docstoc: Make ...</name>
+            <url>http://www.docstoc.com/docs/136418453/Qualifies_interdistricts_Bad_duos_clg06</url>
+            <trust>Unknown</trust>
+        </link>
+        <link>
             <id>e18ee617-dddc-4e21-aa81-47b67a46e5e5</id>
             <name>Site régional d'Ile de France - Fédération Française ...</name>
             <url>http://iledefrance.ffnatation.fr/script/nat_rankings.php?go=clb&amp;idrch_id=1156&amp;idsai=2012&amp;idbas=25&amp;idsex=1</url>
-            <trust>Unknown</trust>
+            <trust>Bad</trust>
         </link>
         <link>
             <id>76c15513-ba5a-4fca-906b-cd8c7b8e8627</id>
             <name>clt temps Nom Prénom Sexe Abbrev. CatégorieClub clt/cat ...</name>
             <url>http://rumba-athle.fr/blog/public/Documents/Courses_St_Gilles/resultat_10k_2010.pdf</url>
-            <trust>Unknown</trust>
-        </link>
-        <link>
-            <id>547aabfe-c650-4b29-9146-9badbb98ee5c</id>
-            <name>Eliott Laversin - Google+</name>
-            <url>https://plus.google.com/114380866035127198885/posts</url>
-            <trust>Unknown</trust>
-        </link>
-        <link>
-            <id>f840138c-7ec9-46e3-8e7f-8ee2d7c2e870</id>
-            <name>INTERCATEGORIES - ^PARIS - 20/11/2011 - Petit bassin</name>
-            <url>http://csnguyancourt.fr/CSNG12/Engagements/111120_intercategorie.HTML</url>
-            <trust>Unknown</trust>
-        </link>
-        <link>
-            <id>e7c109c2-1729-4dcc-8439-68d99b3c6000</id>
-            <name>Qualifies_interdistricts_Bad_duos_clg06 - Docstoc: Make ...</name>
-            <url>http://www.docstoc.com/docs/136418453/Qualifies_interdistricts_Bad_duos_clg06</url>
-            <trust>Unknown</trust>
+            <trust>Trusted</trust>
         </link>
         <link>
             <id>94bbd41d-fa97-4c1c-aa55-ca18d0128f4d</id>
@@ -37,6 +25,29 @@
             <url>http://www.suiviperf.com/competitions/?mod=20&amp;Saison=2012&amp;Competition=900</url>
             <trust>Unknown</trust>
         </link>
+        <link>
+            <id>f840138c-7ec9-46e3-8e7f-8ee2d7c2e870</id>
+            <name>INTERCATEGORIES - ^PARIS - 20/11/2011 - Petit bassin</name>
+            <url>http://csnguyancourt.fr/CSNG12/Engagements/111120_intercategorie.HTML</url>
+            <trust>Trusted</trust>
+        </link>
+        <link>
+            <id>547aabfe-c650-4b29-9146-9badbb98ee5c</id>
+            <name>Eliott Laversin - Google+</name>
+            <url>https://plus.google.com/114380866035127198885/posts</url>
+            <trust>Unknown</trust>
+        </link>
     </links>
-    <graph/>
+    <graph>
+        <edge>
+            <id>94bbd41d-fa97-4c1c-aa55-ca18d0128f4d</id>
+            <id1>e7c109c2-1729-4dcc-8439-68d99b3c6000</id1>
+            <trust>Trusted</trust>
+        </edge>
+        <edge>
+            <id>f840138c-7ec9-46e3-8e7f-8ee2d7c2e870</id>
+            <id1>547aabfe-c650-4b29-9146-9badbb98ee5c</id1>
+            <trust>Trusted</trust>
+        </edge>
+    </graph>
 </results>

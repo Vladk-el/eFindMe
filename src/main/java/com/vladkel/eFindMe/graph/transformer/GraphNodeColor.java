@@ -23,7 +23,7 @@ public class GraphNodeColor implements Transformer<Url, Paint>{
 	@Override
 	public Paint transform(Url node) {
 		
-		Match matches = GraphXML.getInstance().getMatch(Integer.parseInt(node.getId()));
+		Match matches = GraphXML.getInstance().getMatch(node.getId());
 				
 		if(matches != null)
 		{
@@ -42,7 +42,22 @@ public class GraphNodeColor implements Transformer<Url, Paint>{
 					return Color.GREEN;
 			}
 		}
-		
-		return Color.GREEN;
+			else
+			{
+				switch(node.getTrust().toString())
+				{
+					case "Trusted":
+						return Color.GREEN;
+						
+					case "Unknown":
+						return Color.GRAY;
+						
+					case "Bad":
+						return Color.RED;
+						
+					default:
+						return Color.GREEN;
+				}
+			}
 	}
 }

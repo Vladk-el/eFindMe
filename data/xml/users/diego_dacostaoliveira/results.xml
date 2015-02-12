@@ -2,23 +2,23 @@
 <results>
     <links>
         <link>
-            <id>2fd437d8-4aca-44cb-ade7-f4bd2ffcac5b</id>
-            <name>Diego Wiliam da Costa Oliveira - Google+</name>
-            <url>https://plus.google.com/114982579333568199220</url>
+            <id>dd6b1bbd-37c0-4d16-80bf-8539c3d7dab9</id>
+            <name>Diego Da Costa Oliveira | Facebook</name>
+            <url>https://fr-fr.facebook.com/diego93700</url>
             <trust>Unknown</trust>
         </link>
         <link>
-            <id>e42ffa25-b916-4b80-bc11-35b7543dd098</id>
-            <name>Diego Da Costa Oliveira | Facebook</name>
-            <url>https://fr-fr.facebook.com/diego93700</url>
+            <id>60fe72a9-f34c-4932-bdd1-3c9ab9213494</id>
+            <name>Diego Wiliam da Costa Oliveira - Google+</name>
+            <url>https://plus.google.com/114982579333568199220</url>
             <trust>Unknown</trust>
         </link>
     </links>
     <graph>
         <edge>
-            <id>0</id>
-            <id1>e42ffa25-b916-4b80-bc11-35b7543dd098</id1>
-            <trust>Trusted</trust>
+            <id>60fe72a9-f34c-4932-bdd1-3c9ab9213494</id>
+            <id1>dd6b1bbd-37c0-4d16-80bf-8539c3d7dab9</id1>
+            <trust>Bad</trust>
         </edge>
     </graph>
 </results>

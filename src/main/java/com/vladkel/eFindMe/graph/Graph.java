@@ -94,7 +94,7 @@ public class Graph extends JPanel {
 	{
 		graph = new DelegateForest<Url, String>();
 		
-		for(Entry<Integer, Url> value : GraphXML.getInstance().getUrls().entrySet()) {
+		for(Entry<String, Url> value : GraphXML.getInstance().getUrls().entrySet()) {
 		    Url url = value.getValue();
 		    
 		    graph.addVertex(url);
@@ -104,7 +104,7 @@ public class Graph extends JPanel {
 		
 		for(Match matche : GraphXML.getInstance().getMatches())
 		{
-			graph.addEdge(indice.toString(), GraphXML.getInstance().getUrl(Integer.parseInt(matche.getIdSource())), GraphXML.getInstance().getUrl(Integer.parseInt(matche.getIdLink())));
+			graph.addEdge(indice.toString(), GraphXML.getInstance().getUrl(matche.getIdSource()), GraphXML.getInstance().getUrl(matche.getIdLink()));
 			indice++;
 		}
 	}
