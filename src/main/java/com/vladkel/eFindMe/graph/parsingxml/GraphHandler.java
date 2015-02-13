@@ -2,12 +2,14 @@ package com.vladkel.eFindMe.graph.parsingxml;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
+import com.vladkel.eFindMe.search.engine.SearchEngine;
 import com.vladkel.eFindMe.search.engine.model.Match;
 import com.vladkel.eFindMe.search.engine.model.Trust;
 import com.vladkel.eFindMe.search.engine.model.Url;
@@ -26,6 +28,11 @@ public class GraphHandler implements ContentHandler {
 	{
 		GraphXML.getInstance().getUrls().clear();
 		GraphXML.getInstance().getMatches().clear();
+		
+		for(Url u : SearchEngine.getInstance().currentUser.getUrlsToLookFor()) {
+			
+		    GraphXML.getInstance().getUrls().put(u.getId(),u);
+		}
 	}
 	
 	public void startDocument() throws SAXException {

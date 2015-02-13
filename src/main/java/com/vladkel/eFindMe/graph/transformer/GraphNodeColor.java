@@ -42,7 +42,7 @@ public class GraphNodeColor implements Transformer<Url, Paint>{
 					return Color.GREEN;
 			}
 		}
-			else
+			else if(node.getTrust() != null)
 			{
 				switch(node.getTrust().toString())
 				{
@@ -59,5 +59,8 @@ public class GraphNodeColor implements Transformer<Url, Paint>{
 						return Color.GREEN;
 				}
 			}
+		
+			else
+				return Color.GREEN;
 	}
 }
