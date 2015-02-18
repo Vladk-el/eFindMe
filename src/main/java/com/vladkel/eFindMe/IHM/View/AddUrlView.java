@@ -3,7 +3,6 @@ package com.vladkel.eFindMe.IHM.View;
 import com.vladkel.eFindMe.IHM.MainWindow;
 import com.vladkel.eFindMe.search.engine.SearchEngine;
 import com.vladkel.eFindMe.search.engine.model.Url;
-import com.vladkel.eFindMe.search.engine.model.User;
 
 import javax.swing.*;
 
@@ -17,7 +16,9 @@ import java.awt.event.WindowEvent;
  */
 public class AddUrlView extends JFrame {
 
-    private MainWindow mainWindow;
+	private static final long serialVersionUID = 2371035244213180842L;
+
+	private MainWindow mainWindow;
 
     private JLabel addurlsToLookForLabel = new JLabel("Ajouter une url :");
 

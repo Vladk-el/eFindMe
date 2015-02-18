@@ -1,21 +1,18 @@
 package com.vladkel.eFindMe.IHM.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UrlFindModel {
 	private String url;
-	private List<String> keywords;
+	private String trust;
 	
 	public UrlFindModel()
 	{
-		keywords = new ArrayList<String>();
+		super();
 	}
 	
-	public UrlFindModel(String url,List<String> keyWords)
+	public UrlFindModel(String url, String trust)
 	{
 		this.url = url;
-		this.keywords = keyWords;
+		this.trust = trust;
 	}
 	
 	public String getUrl() {
@@ -25,12 +22,12 @@ public class UrlFindModel {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	public List<String> getKeyWords() {
-		return keywords;
+
+	public String getTrust() {
+		return trust;
 	}
 
-	public void setKeyWords(List<String> keywords) {
-		this.keywords = keywords;
+	public void setTrust(String trust) {
+		this.trust = trust;
 	}
 }

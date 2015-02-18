@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<user>
+    <id>3</id>
+    <name>Hollande</name>
+    <firstname>François</firstname>
+    <email>françois@hollande.fr</email>
+    <urlsToLookFor>
+        <url>
+            <id>0</id>
+            <name>Facebook</name>
+            <description>Facebook</description>
+            <url>https://www.facebook.com/francoishollande.fr</url>
+        </url>
+        <url>
+            <id>1</id>
+            <name>Wikipédia</name>
+            <description>Wikipédia</description>
+            <url>http://fr.wikipedia.org/wiki/Fran%C3%A7ois_Hollande</url>
+        </url>
+    </urlsToLookFor>
+</user>

@@ -16,6 +16,7 @@ import com.vladkel.eFindMe.search.engine.model.Url;
 
 public class UrlsHandler implements ContentHandler {
 	
+	@SuppressWarnings("unused")
 	private static final Logger log = LoggerFactory.getLogger(UrlsHandler.class);
 	
 	private StringBuffer buffer;

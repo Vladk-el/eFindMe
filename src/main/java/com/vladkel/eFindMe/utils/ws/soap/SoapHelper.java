@@ -9,6 +9,7 @@ import javax.xml.ws.BindingProvider;
 
 public class SoapHelper {
 
+	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(SoapHelper.class);
 	
 	protected int timeOut = 10000;

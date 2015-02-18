@@ -14,6 +14,7 @@ import com.vladkel.eFindMe.search.engine.model.Match;
 
 public class MatchesHandler implements ContentHandler {
 	
+	@SuppressWarnings("unused")
 	private static final Logger log = LoggerFactory.getLogger(MatchesHandler.class);
 	
 	private StringBuffer buffer;

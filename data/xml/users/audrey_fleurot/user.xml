@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<user>
+    <id>4</id>
+    <name>Fleurot</name>
+    <firstname>Audrey</firstname>
+    <email>Fleurot@Audrey.com</email>
+    <urlsToLookFor>
+        <url>
+            <id>0</id>
+            <name>Facebook</name>
+            <description>Facebook</description>
+            <url>https://www.facebook.com/AudreyFleurotOfficiel</url>
+        </url>
+    </urlsToLookFor>
+</user>

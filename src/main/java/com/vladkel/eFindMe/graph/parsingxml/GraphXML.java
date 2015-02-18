@@ -72,7 +72,6 @@ public class GraphXML {
 	public void showYourself(){
 		
 		for(Entry<String, Url> url : urls.entrySet()) {
-		    String cle = url.getKey();
 		    Url valueUrl = url.getValue();
 		    
 		    System.out.println("Id : " + valueUrl.getId());

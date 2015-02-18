@@ -19,6 +19,8 @@ import com.vladkel.eFindMe.search.engine.model.User;
 
 public class AddUserView extends JFrame{
 
+	private static final long serialVersionUID = -4318863430875961722L;
+
 	private JButton saveUser = new JButton("Enregistrer");
 
 	private JLabel addUserLabel = new JLabel("Ajouter un utilisateur");
@@ -44,8 +46,8 @@ public class AddUserView extends JFrame{
 	
 	private JLabel urlsToLookForLabel = new JLabel("Vos urls :");
 	
-	public DefaultListModel modelUrlsToLookFor = new DefaultListModel();
-	private JList listUrlsToLookFor = new JList(modelUrlsToLookFor);
+	public DefaultListModel<Url> modelUrlsToLookFor = new DefaultListModel<Url>();
+	private JList<Url> listUrlsToLookFor = new JList<Url>(modelUrlsToLookFor);
     private JButton addUrl = new JButton("Ajouter");
     private JButton deleteUrl = new JButton("-");
     
@@ -248,8 +250,11 @@ public class AddUserView extends JFrame{
 
 					  Integer indice = 0;
 
-					  if(userToCreate.getUrlsToLookFor().size() > 0)
-						  indice = Integer.parseInt(userToCreate.getUrlsToLookFor().get(userToCreate.getUrlsToLookFor().size() - 1).getId()) + 1;
+					  if(modelUrlsToLookFor.size() > 0)
+						  indice = Integer.parseInt(modelUrlsToLookFor.get(modelUrlsToLookFor.size() - 1).getId()) + 1;
+					  
+					  
+					  System.out.println(indice);
 
 					  System.out.println("Indice url : " + indice);
 
@@ -310,10 +315,6 @@ public class AddUserView extends JFrame{
 
 					  User.createUser(userToCreate);
 
-					  /**
-					   * Maybe move it to the main windows with an update method
-					   */
-
 					  closeAndLoad();
 
 				  }
@@ -352,6 +353,7 @@ public class AddUserView extends JFrame{
 
 		SearchEngine.getInstance().updateConf();
 		SearchEngine.getInstance().currentUser = SearchEngine.getInstance().getConfs().getUsers().get(userToCreate.getId());
+		MainWindow.getInstance().showSelectUser();
 		MainWindow.getInstance().searchForCurrentUser();
 
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

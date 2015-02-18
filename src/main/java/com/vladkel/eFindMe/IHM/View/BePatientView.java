@@ -11,11 +11,9 @@ import java.net.URL;
 
 public class BePatientView extends JFrame {
 
-    // http://www.golfllnnews.com/wp-content/uploads/2013/04/Pictures-loading.jpg
-    // http://files.dametenebra.com/eFindMe/Loading-Gif-5.gif
-    // https://www.shipco.com/include/images/shipco/loading1.gif
+	private static final long serialVersionUID = 5064528886462037793L;
 
-    public BePatientView() {
+	public BePatientView() {
         URL url = null;
         try {
             url = new URL("http://files.dametenebra.com/eFindMe/Loading-Gif-5.gif");

@@ -5,10 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.xml.sax.XMLReader;
-
 import com.vladkel.eFindMe.search.engine.SearchEngine;
-import com.vladkel.eFindMe.search.engine.conf.SearchEngineConfs;
 import com.vladkel.eFindMe.search.engine.model.User;
 
 public class XMLParsing {

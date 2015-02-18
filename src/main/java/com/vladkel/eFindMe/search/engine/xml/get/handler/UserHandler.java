@@ -15,6 +15,7 @@ import com.vladkel.eFindMe.search.engine.model.User;
 
 public class UserHandler implements ContentHandler {
 	
+	@SuppressWarnings("unused")
 	private static final Logger log = LoggerFactory.getLogger(UserHandler.class);
 	
 	private StringBuffer buffer;

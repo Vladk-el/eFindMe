@@ -1,9 +1,6 @@
 package com.vladkel.eFindMe.IHM.View;
 
-import com.google.gson.Gson;
 import com.vladkel.eFindMe.IHM.MainWindow;
-import com.vladkel.eFindMe.IHM.model.UrlFindModel;
-import com.vladkel.eFindMe.graph.parsingxml.GraphXML;
 import com.vladkel.eFindMe.search.engine.SearchEngine;
 import com.vladkel.eFindMe.search.engine.model.Match;
 import com.vladkel.eFindMe.search.engine.model.Trust;
@@ -16,10 +13,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.Map.Entry;
 
 public class UpdateTrustView extends JFrame {
+
+	private static final long serialVersionUID = -2431099744606737387L;
 
 	private Url url;
 	
@@ -27,12 +25,14 @@ public class UpdateTrustView extends JFrame {
     private JLabel displayUrlLabel = new JLabel("");
 
     private JLabel displayTrustLabel = new JLabel("Modifier la confiance de l'url :");
-    private JTextField nameUrlTextField = new JTextField();
+    @SuppressWarnings("unused")
+	private JTextField nameUrlTextField = new JTextField();
 
     private JButton updateTrust = new JButton("Modifier");
     
     private String[] valueTrust = { "Bad", "Unknown", "Trusted"};
-    private JComboBox trustList = new JComboBox(valueTrust);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	private JComboBox trustList = new JComboBox(valueTrust);
 
     public UpdateTrustView(Url url){
     	this.url = url;
@@ -156,6 +156,7 @@ public class UpdateTrustView extends JFrame {
 	        				user.writeSelfXMLFiles();
 	        				
 	        				MainWindow.getInstance().setUser();
+	        				close();
 	    				}
 	    			}
 	    		}

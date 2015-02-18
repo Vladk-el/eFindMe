@@ -28,6 +28,8 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
 public class Graph extends JPanel {
 
+	private static final long serialVersionUID = -2702837819259991888L;
+	
 	private Forest<Url,String> graph;
 	private VisualizationViewer<Url,String> vv;
     private TreeLayout<Url, String> treeLayout;

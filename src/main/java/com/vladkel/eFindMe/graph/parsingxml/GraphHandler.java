@@ -2,7 +2,6 @@ package com.vladkel.eFindMe.graph.parsingxml;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;

@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.swing.*;
 
@@ -48,8 +47,8 @@ public class MainWindow
 	
 	private JLabel urlsToLookForLabel = new JLabel("Vos urls :");
 	
-	private DefaultListModel modelUrlsToLookFor = new DefaultListModel();
-	private JList listUrlsToLookFor = new JList(modelUrlsToLookFor);
+	private DefaultListModel<Url> modelUrlsToLookFor = new DefaultListModel<Url>();
+	private JList<Url> listUrlsToLookFor = new JList<Url>(modelUrlsToLookFor);
     private JButton addUrl = new JButton("+");
     private JButton deleteUrl = new JButton("-");
 
@@ -58,6 +57,7 @@ public class MainWindow
     JScrollPane jspUrlsFind = new JScrollPane(tableUrlsFind);
 
 	private JButton search = new JButton("Lancer la recherche");
+	private JButton delete = new JButton("Supprimer");
     private JButton update = new JButton("Modifier");
 	
 	private Graph graph = new Graph();
@@ -81,6 +81,7 @@ public class MainWindow
     JScrollPane jspUsersFind = new JScrollPane(tableUsersFind);
     private JButton buttonSelectUser = new JButton("Valider");
 
+	@SuppressWarnings("static-access")
 	public MainWindow()
 	{
 		SearchEngine.getInstance().getConfs().loadUsers();
@@ -104,12 +105,14 @@ public class MainWindow
 		events();		
 	}
 	
+	@SuppressWarnings("unused")
 	private void getCurrentUser()
 	{
 		// Check the last used user
 		SearchEngine.getInstance().currentUser = SearchEngine.getInstance().getConfs().getUsers().get("1");
 	}
 	
+	@SuppressWarnings("static-access")
 	private void initSelectUser()
 	{
 		selectUser.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 4,mainFrame.MAXIMIZED_VERT));
@@ -159,6 +162,7 @@ public class MainWindow
 		mainFrame.getContentPane().add(selectUser, BorderLayout.WEST);
 	}
 	
+	@SuppressWarnings("static-access")
 	private void initUserDetail()
 	{		
 		selectUser.setVisible(false);
@@ -190,6 +194,7 @@ public class MainWindow
 	    
 		search.setBackground(Color.WHITE);
 	    update.setBackground(Color.WHITE);
+	    delete.setBackground(Color.WHITE);
    
 		gbc.gridx = 0;
 	    gbc.gridy = 0;
@@ -317,6 +322,14 @@ public class MainWindow
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.insets = new Insets(15,0,0,0);
 		userDetail.add(search, gbc);
+	    
+		gbc.gridx = 1;
+	    gbc.gridy = 14;
+	    gbc.gridheight = 1;
+	    gbc.gridwidth = 1;
+	    gbc.anchor = GridBagConstraints.CENTER;
+	    gbc.insets = new Insets(15,0,0,0);
+	    userDetail.add(update, gbc);
 
 		gbc.gridx = 1;
 	    gbc.gridy = 14;
@@ -324,7 +337,7 @@ public class MainWindow
 	    gbc.gridwidth = 1;
 	    gbc.anchor = GridBagConstraints.EAST;
 	    gbc.insets = new Insets(15,0,0,0);
-	    userDetail.add(update, gbc);
+	    userDetail.add(delete, gbc);
 	     
 		mainFrame.getContentPane().add(userDetail, BorderLayout.WEST);
 	}
@@ -355,13 +368,11 @@ public class MainWindow
 		List<UrlFindModel> urlsFind = new ArrayList<UrlFindModel>();
 		modelUrlsToLookFor.clear();
 		
-		for(Url url : user.getUrlsToLookFor()) modelUrlsToLookFor.addElement(url);
+		for(Url url : user.getUrlsToLookFor()) 
+			modelUrlsToLookFor.addElement(url);
 		
-		for(Entry<String, Url> value : GraphXML.getInstance().getUrls().entrySet()) {
-			
-		    Url url = value.getValue();
-		    
-			UrlFindModel ufm = new UrlFindModel(url.getUrl(),new ArrayList<String>());
+		for(Url url : SearchEngine.getInstance().currentUser.getUrls().values()){
+			UrlFindModel ufm = new UrlFindModel(url.getUrl(), url.getTrust().toString());
 		    urlsFind.add(ufm);
 		}
 			
@@ -401,7 +412,8 @@ public class MainWindow
 	{
 		addUser.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
-		    	  AddUserView auv = new AddUserView();
+		    	  @SuppressWarnings("unused")
+				AddUserView auv = new AddUserView();
 		      }
 		    });
 		
@@ -428,15 +440,6 @@ public class MainWindow
 		    		searchUserTextField.setText("");  
             }
         });
-
-
-		/**
-		 * Not implemented yet :
-		 * 	update
-		 *
-		 * Look at the logs : GetUsers called to many times
-		 *
-		 */
 
 		final MainWindow self = this;
 
@@ -519,12 +522,38 @@ public class MainWindow
 
 						user.writeSelfXMLFiles();
 						SearchEngine.getInstance().updateConf();
+						SearchEngine.getInstance().currentUser = SearchEngine.getInstance().getConfs().getUsers().get(user.getId());
+						initUserDetail();
 					}
 				}
 				else {
 					JOptionPane.showMessageDialog(null,
 							"Veuillez remplir au moins les champs Nom et Prénom pour modifier un utilisateur."
 					);
+				}
+			}
+		});
+		
+		delete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String message = "Etes vous sûr de vouloir supprimer l'utilisateur ?";
+				String title = "Supprimer l'utilisateur ?";
+				int reply = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+
+				if(reply == JOptionPane.YES_OPTION){
+
+					SearchEngine.getInstance().currentUser.removeSelfXMLFiles();
+
+					@SuppressWarnings("static-access")
+					User user = new SearchEngine().getInstance().currentUser;
+
+					user.removeSelfXMLFiles();
+					SearchEngine.getInstance().updateConf();
+					
+					showSelectUser();
+					
 				}
 			}
 		});
@@ -539,14 +568,18 @@ public class MainWindow
 		consultUsers.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				selectUser.setVisible(true);
-				userDetail.setVisible(false);
-			    initSelectUser();
-
-				mainFrame.validate();
-				mainFrame.repaint();
+				showSelectUser();
 			}
 		});
+	}
+	
+	public void showSelectUser(){
+		selectUser.setVisible(true);
+		userDetail.setVisible(false);
+	    initSelectUser();
+
+		mainFrame.validate();
+		mainFrame.repaint();
 	}
 
 	private boolean isReadyToUpdate(){
@@ -560,6 +593,7 @@ public class MainWindow
 		System.out.println("searchForCurrentUser()");
 
 		try{
+			@SuppressWarnings("unused")
 			BePatientView bePatient = new BePatientView();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -571,7 +605,7 @@ public class MainWindow
 	 * Getters and Setters
 	 */
 
-	public DefaultListModel getModelUrlsToLookFor(){
+	public DefaultListModel<Url> getModelUrlsToLookFor(){
 		return modelUrlsToLookFor;
 	}
 

@@ -6,7 +6,9 @@ import javax.swing.table.AbstractTableModel;
 
 public class UrlFindTableModel extends AbstractTableModel {
 
-	private final String[] entetes = { "Url", "Mots cles"};	
+	private static final long serialVersionUID = -6592915932272405128L;
+	
+	private final String[] entetes = { "Url", "Confiance"};	
 	private List<UrlFindModel> urlsFind;
 	
 	public UrlFindTableModel(List<UrlFindModel> urlsFind)
@@ -34,14 +36,7 @@ public class UrlFindTableModel extends AbstractTableModel {
 				return urlsFind.get(rowIndex).getUrl();
 	
 			case 1:
-				StringBuilder keywords = new StringBuilder();
-				
-				for(String key : urlsFind.get(rowIndex).getKeyWords())
-				{
-					keywords.append(key);
-				}
-				
-				return keywords.toString();
+				return urlsFind.get(rowIndex).getTrust();
 	
 			default:
 				throw new IllegalArgumentException();

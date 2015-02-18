@@ -8,6 +8,8 @@ import com.vladkel.eFindMe.search.engine.model.User;
 
 public class UserFindTableModel extends AbstractTableModel {
 
+	private static final long serialVersionUID = 4732144004160165466L;
+	
 	private final String[] entetes = { "Nom","Prenom"};	
 	private List<User> usersFind;
 	
