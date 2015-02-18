@@ -136,7 +136,7 @@ public class AddUrlView extends JFrame {
                     System.out.println("Indice url : " + indice.toString());
 
                     url.setId(indice.toString());
-                    url.setDescription(descriptionUrlLabel.getText());
+                    url.setDescription(descriptionUrlTextArea.getText());
                     url.setName(nameUrlTextField.getText());
                     url.setUrl(urlTextField.getText());
 

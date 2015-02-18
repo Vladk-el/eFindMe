@@ -2,51 +2,52 @@
 <results>
     <links>
         <link>
-            <id>e7c109c2-1729-4dcc-8439-68d99b3c6000</id>
+            <id>3ae564c3-ea64-4afb-a69b-886de2a745ae</id>
             <name>Qualifies_interdistricts_Bad_duos_clg06 - Docstoc: Make ...</name>
             <url>http://www.docstoc.com/docs/136418453/Qualifies_interdistricts_Bad_duos_clg06</url>
             <trust>Unknown</trust>
         </link>
         <link>
-            <id>e18ee617-dddc-4e21-aa81-47b67a46e5e5</id>
-            <name>Site régional d'Ile de France - Fédération Française ...</name>
-            <url>http://iledefrance.ffnatation.fr/script/nat_rankings.php?go=clb&amp;idrch_id=1156&amp;idsai=2012&amp;idbas=25&amp;idsex=1</url>
-            <trust>Bad</trust>
+            <id>e5b4ea96-8827-4a65-90a8-6954990774c5</id>
+            <name>TAILLEFER Guillaume - Google+</name>
+            <url>https://plus.google.com/113711793939716524760</url>
+            <trust>Unknown</trust>
         </link>
         <link>
-            <id>76c15513-ba5a-4fca-906b-cd8c7b8e8627</id>
-            <name>clt temps Nom Prénom Sexe Abbrev. CatégorieClub clt/cat ...</name>
-            <url>http://rumba-athle.fr/blog/public/Documents/Courses_St_Gilles/resultat_10k_2010.pdf</url>
-            <trust>Trusted</trust>
-        </link>
-        <link>
-            <id>94bbd41d-fa97-4c1c-aa55-ca18d0128f4d</id>
+            <id>55176c58-8747-483e-be81-ab54abe4bd58</id>
             <name>ES Massy Natation- Gestion des compétitions</name>
             <url>http://www.suiviperf.com/competitions/?mod=20&amp;Saison=2012&amp;Competition=900</url>
             <trust>Unknown</trust>
         </link>
         <link>
-            <id>f840138c-7ec9-46e3-8e7f-8ee2d7c2e870</id>
-            <name>INTERCATEGORIES - ^PARIS - 20/11/2011 - Petit bassin</name>
-            <url>http://csnguyancourt.fr/CSNG12/Engagements/111120_intercategorie.HTML</url>
-            <trust>Trusted</trust>
+            <id>3088f976-5b5d-4946-822a-83e15d562f46</id>
+            <name>Site régional d'Ile de France - Fédération Française ...</name>
+            <url>http://iledefrance.ffnatation.fr/script/nat_rankings.php?go=clb&amp;idrch_id=1156&amp;idsai=2012&amp;idbas=25&amp;idsex=1</url>
+            <trust>Unknown</trust>
         </link>
         <link>
-            <id>547aabfe-c650-4b29-9146-9badbb98ee5c</id>
+            <id>856ad030-2e6e-4a98-a4e9-b3e51232a1a1</id>
+            <name>INTERCATEGORIES - ^PARIS - 20/11/2011 - Petit bassin</name>
+            <url>http://csnguyancourt.fr/CSNG12/Engagements/111120_intercategorie.HTML</url>
+            <trust>Unknown</trust>
+        </link>
+        <link>
+            <id>f96627c7-5602-4639-96fa-0dee96d408ab</id>
             <name>Eliott Laversin - Google+</name>
             <url>https://plus.google.com/114380866035127198885/posts</url>
+            <trust>Unknown</trust>
+        </link>
+        <link>
+            <id>43c77b8a-7aee-481e-9050-3229d7795e40</id>
+            <name>clt temps Nom Prénom Sexe Abbrev. CatégorieClub clt/cat ...</name>
+            <url>http://rumba-athle.fr/blog/public/Documents/Courses_St_Gilles/resultat_10k_2010.pdf</url>
             <trust>Unknown</trust>
         </link>
     </links>
     <graph>
         <edge>
-            <id>94bbd41d-fa97-4c1c-aa55-ca18d0128f4d</id>
-            <id1>e7c109c2-1729-4dcc-8439-68d99b3c6000</id1>
-            <trust>Trusted</trust>
-        </edge>
-        <edge>
-            <id>f840138c-7ec9-46e3-8e7f-8ee2d7c2e870</id>
-            <id1>547aabfe-c650-4b29-9146-9badbb98ee5c</id1>
+            <id>2</id>
+            <id1>f96627c7-5602-4639-96fa-0dee96d408ab</id1>
             <trust>Trusted</trust>
         </edge>
     </graph>

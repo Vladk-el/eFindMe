@@ -2,13 +2,19 @@
 <results>
     <links>
         <link>
-            <id>937a4f5f-b8d2-4617-8175-fa9b4b6480f1</id>
+            <id>fabceb48-a1c7-48e7-8ddc-651c21391586</id>
             <name>Diego Wiliam da Costa Oliveira - Google+</name>
             <url>https://plus.google.com/114982579333568199220</url>
             <trust>Unknown</trust>
         </link>
         <link>
-            <id>cdee2082-f974-41bf-b30c-c299874672cf</id>
+            <id>358b7155-acb3-4b8c-90d4-72ceaf231b00</id>
+            <name>DA COSTA MIRANDA Maria - DA COSTA OLIVEIRA Diego - Copains ...</name>
+            <url>http://copainsdavant.linternaute.com/glossary/users/d-1-10-12</url>
+            <trust>Unknown</trust>
+        </link>
+        <link>
+            <id>50241c55-2c84-4e85-8652-28025f742f4a</id>
             <name>Diego Da Costa Oliveira | Facebook</name>
             <url>https://fr-fr.facebook.com/diego93700</url>
             <trust>Unknown</trust>
@@ -17,8 +23,8 @@
     <graph>
         <edge>
             <id>0</id>
-            <id1>cdee2082-f974-41bf-b30c-c299874672cf</id1>
-            <trust>Bad</trust>
+            <id1>50241c55-2c84-4e85-8652-28025f742f4a</id1>
+            <trust>Trusted</trust>
         </edge>
     </graph>
 </results>

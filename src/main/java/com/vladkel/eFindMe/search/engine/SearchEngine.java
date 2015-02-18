@@ -159,7 +159,7 @@ public class SearchEngine {
 			veryDetailledSearch(user, newUrl, addToMap);
 		else if(addToMap){
 			user.getUrls().put(newUrl.getId(), newUrl);
-			log.info("MATCH \\O/ --> " + newUrl);
+			log.info("MATCH \\O/ --> " + newUrl + " : " + newUrl.getUrl());
 		}
 		
 	}
@@ -205,7 +205,7 @@ public class SearchEngine {
 			
 			if(addToMap){
 				user.getUrls().put(newUrl.getId(), newUrl);
-				log.info("MATCH \\O/ --> " + newUrl);
+				log.info("MATCH \\O/ --> " + newUrl + " : " + newUrl.getUrl());
 			}
 				
 		}

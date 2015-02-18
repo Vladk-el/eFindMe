@@ -17,5 +17,11 @@
             <description>Page GitHub d'Eliott Laversin</description>
             <url>https://github.com/Vladk-el</url>
         </url>
+        <url>
+            <id>2</id>
+            <name>Eliott Laversin - Google+</name>
+            <description>Google+</description>
+            <url>https://plus.google.com/114380866035127198885/posts</url>
+        </url>
     </urlsToLookFor>
 </user>
